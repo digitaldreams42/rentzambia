@@ -8,6 +8,8 @@
 
 # testing
 /coverage
+/cypress/screenshots
+/cypress/videos
 
 # next.js
 /.next/
@@ -34,3 +36,44 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# logs
+*.log
+
+# runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# environment files
+.env
+.env.test
+
+# jest
+jest.config.js
+
+# cypress
+cypress/plugins
+
+# docker
+docker-compose.override.yml
+
+# husky
+.husky/_
+
+# IDE
+.vscode
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+
+# Documentation
+docs/*.html
+docs/*.pdf
+
+# Build tools
+.parcel-cache
+.rpt2_cache
+.tmp

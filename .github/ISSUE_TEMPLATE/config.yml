@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: RentZambia Support
+    url: https://rentzambia.com/support
+    about: Please check our support page for help with using RentZambia
+  - name: RentZambia Documentation
+    url: https://rentzambia.com/docs
+    about: Please check our documentation for detailed information about RentZambia
+  - name: RentZambia Community
+    url: https://rentzambia.com/community
+    about: Join our community for discussions and help from other users

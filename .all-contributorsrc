@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "georgejackson",
+      "name": "George Jackson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1234567?v=4",
+      "profile": "https://github.com/georgejackson",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "ideas",
+        "review",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "rentzambia",
+  "projectOwner": "georgejackson",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

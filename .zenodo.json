@@ -1,0 +1,46 @@
+{
+  "title": "RentZambia: A Modern Property Rental Platform",
+  "version": "1.0.0",
+  "description": "RentZambia is a comprehensive property rental platform designed for the Zambian market. It connects tenants with landlords and agents, making property rental simple, fast, and secure.",
+  "keywords": [
+    "property rental",
+    "real estate",
+    "zambia",
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "George Jackson",
+      "orcid": "0000-0000-0000-0000",
+      "affiliation": "University of Zambia"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Community Contributors",
+      "type": "Other"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/yourusername/rentzambia",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "grants": [
+    {
+      "code": "XYZ-123",
+      "funder": "National Science Foundation"
+    }
+  ],
+  "communities": [
+    {
+      "identifier": "zenodo"
+    }
+  ]
+}

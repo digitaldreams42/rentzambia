@@ -1,0 +1,28 @@
+# Code Owners
+
+# Global owners
+* @georgejackson
+
+# Documentation
+README.md @georgejackson
+docs/ @georgejackson
+
+# Source code
+src/ @georgejackson
+
+# Tests
+__tests__/ @georgejackson
+cypress/ @georgejackson
+
+# Configuration
+package.json @georgejackson
+tsconfig.json @georgejackson
+next.config.mjs @georgejackson
+tailwind.config.ts @georgejackson
+
+# GitHub Actions
+.github/workflows/ @georgejackson
+
+# Security
+SECURITY.md @georgejackson
+.github/SECURITY.md @georgejackson

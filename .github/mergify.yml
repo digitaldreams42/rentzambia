@@ -1,0 +1,36 @@
+pull_request_rules:
+  - name: Automatically merge pull requests
+    conditions:
+      - "#approved-reviews-by>=1"
+      - base=main
+      - label=automerge
+      - status-success=ci/circleci
+    actions:
+      merge:
+        method: squash
+      delete_head_branch: {}
+
+  - name: Automatically approve pull requests from maintainers
+    conditions:
+      - author~=^(georgejackson)$
+      - base=main
+    actions:
+      review:
+        type: APPROVE
+        message: Automatically approved because the author is a maintainer.
+
+  - name: Ask to resolve conflicts
+    conditions:
+      - conflict
+    actions:
+      comment:
+        message: This pull request has conflicts. Please resolve them.
+
+  - name: Close stale pull requests
+    conditions:
+      - author!=georgejackson
+      - -updated-at<21 days ago
+      - -label=keep-alive
+    actions:
+      close:
+        message: This pull request has been closed because it has been inactive for 21 days.

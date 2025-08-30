@@ -1,0 +1,31 @@
+{
+  "entry": [
+    "src/app/**/*.{ts,tsx}",
+    "src/components/**/*.{ts,tsx}",
+    "src/hooks/**/*.{ts,tsx}",
+    "src/lib/**/*.{ts,tsx}",
+    "src/services/**/*.{ts,tsx}",
+    "src/types/**/*.{ts,tsx}",
+    "src/data/**/*.{ts,tsx}"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}"
+  ],
+  "ignore": [
+    "src/app/api/**",
+    "src/__tests__/**",
+    "src/__mocks__/**",
+    "cypress/**"
+  ],
+  "ignoreDependencies": [
+    "husky",
+    "lint-staged",
+    "@commitlint/*",
+    "@semantic-release/*",
+    "size-limit",
+    "stylelint*",
+    "markdownlint*",
+    "textlint*",
+    "cspell"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "upgrade": true,
+  "reject": [
+    "next",
+    "react",
+    "react-dom"
+  ],
+  "target": "latest",
+  "filter": [],
+  "rejectTags": [
+    "alpha",
+    "beta",
+    "rc",
+    "deprecated"
+  ],
+  "dep": "prod,dev,optional,bundle,peer"
+}

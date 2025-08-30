@@ -1,0 +1,32 @@
+{
+  "filters": {
+    "comments": true
+  },
+  "rules": {
+    "preset-jtf-style": true,
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        "max": 100
+      },
+      "max-ten": {
+        "max": 3
+      },
+      "no-double-negative-ja": true,
+      "no-doubled-conjunctive-particle-ga": true,
+      "no-doubled-conjunction": true,
+      "no-doubled-joshi": {
+        "min_interval": 1
+      },
+      "no-dropping-the-ra": true,
+      "no-hankaku-kana": true,
+      "no-mix-dearu-desumasu": true,
+      "no-nfd": true,
+      "no-redundant-expression": true,
+      "no-zero-width-spaces": true,
+      "prefer-tari-tari": true,
+      "ja-no-mixed-period": true,
+      "ja-no-redundant-expression": true,
+      "ja-unnatural-alphabet": true
+    }
+  }
+}

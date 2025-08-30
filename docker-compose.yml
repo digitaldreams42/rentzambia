@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env.local
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - rentzambia-network
+
+  # Uncomment and configure if using a database
+  # mongodb:
+  #   image: mongo:5.0
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongodb_data:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   networks:
+  #     - rentzambia-network
+
+  # Uncomment and configure if using Redis for caching
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - rentzambia-network
+
+networks:
+  rentzambia-network:
+    driver: bridge
+
+# Uncomment and configure if using volumes for database
+# volumes:
+#   mongodb_data:
