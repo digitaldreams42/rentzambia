@@ -14,11 +14,22 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ['mongoose'],
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    // Handle SVG files
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+    
+    // Fix for Webpack 5 issue with polyfills
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
     
     return config;
   },
