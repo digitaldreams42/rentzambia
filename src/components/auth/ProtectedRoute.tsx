@@ -1,44 +1,39 @@
 "use client";
 
-import * as React from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useAuth } from "@/context/AuthContext";
+import { Icons } from "@/components/ui/icons";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  requiredRole?: "tenant" | "landlord" | "agent" | "admin";
+  allowedRoles: string[];
 }
 
-export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {
-  const { user } = useAuth();
+export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
+  const { currentUser, userData, loading } = useAuth();
   const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(true);
 
-  React.useEffect(() => {
-    // Check if user is authenticated
-    if (!user) {
+  useEffect(() => {
+    if (!loading && !currentUser) {
       // Redirect to login if not authenticated
       router.push("/login");
-      return;
+    } else if (!loading && currentUser && userData && !allowedRoles.includes(userData.role)) {
+      // Redirect to appropriate dashboard if role is not allowed
+      router.push(`/${userData.role}`);
     }
+  }, [currentUser, userData, loading, router, allowedRoles]);
 
-    // Check if user has required role
-    if (requiredRole && user.role !== requiredRole) {
-      // Redirect to appropriate dashboard
-      router.push(`/${user.role}`);
-      return;
-    }
-
-    setIsLoading(false);
-  }, [user, requiredRole, router]);
-
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" />
+      <div className="flex items-center justify-center min-h-screen">
+        <Icons.spinner className="h-8 w-8 animate-spin" />
       </div>
     );
+  }
+
+  if (!currentUser || (userData && !allowedRoles.includes(userData.role))) {
+    return null;
   }
 
   return <>{children}</>;

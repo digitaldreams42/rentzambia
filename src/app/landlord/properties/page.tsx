@@ -14,10 +14,9 @@ const mockProperties = [
     title: "Modern 2-Bedroom Apartment in Kabulonga",
     location: "Kabulonga, Lusaka",
     price: 3500,
-    status: "available",
+    status: "available" as const,
     views: 124,
     inquiries: 8,
-    bookings: 2,
     images: [
       "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg"
     ]
@@ -27,10 +26,9 @@ const mockProperties = [
     title: "Spacious 3-Bedroom House in Roma",
     location: "Roma, Lusaka",
     price: 4200,
-    status: "pending",
+    status: "pending" as const,
     views: 0,
     inquiries: 0,
-    bookings: 0,
     images: [
       "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
     ]
@@ -40,10 +38,9 @@ const mockProperties = [
     title: "Luxury Studio in City Center",
     location: "City Center, Lusaka",
     price: 2800,
-    status: "rented",
+    status: "rented" as const,
     views: 87,
     inquiries: 12,
-    bookings: 1,
     images: [
       "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg"
     ]
@@ -201,7 +198,7 @@ export default function LandlordPropertiesPage() {
               <PropertyForm
                 onSubmit={handleAddProperty}
                 onCancel={() => setShowAddForm(false)}
-                isLoading={isLoading}
+                loading={isLoading}
               />
             </div>
           </div>
@@ -230,13 +227,13 @@ export default function LandlordPropertiesPage() {
               </div>
               
               <PropertyForm
-                initialData={editingProperty}
+                property={editingProperty}
                 onSubmit={handleUpdateProperty}
                 onCancel={() => {
                   setShowEditForm(false);
                   setEditingProperty(null);
                 }}
-                isLoading={isLoading}
+                loading={isLoading}
               />
             </div>
           </div>

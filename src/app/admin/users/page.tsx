@@ -4,11 +4,27 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { UserCard } from "@/components/admin/UserCard";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { ROLES, USER_STATUS_OPTIONS } from "@/data/constants";
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: "tenant" | "landlord" | "agent" | "admin";
+  status: "active" | "pending" | "suspended";
+  properties: number;
+  joinDate: string;
+}
+
 // Mock user data
-const mockUsers = [
+const mockUsers: User[] = [
   { 
     id: 1, 
     name: "John Mwanza", 
@@ -48,7 +64,7 @@ const mockUsers = [
 ];
 
 export default function AdminUsersPage() {
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState<User[]>(mockUsers);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -118,32 +134,34 @@ export default function AdminUsersPage() {
             </div>
             
             <div>
-              <Select
-                value={roleFilter}
-                onChange={(e) => setRoleFilter(e.target.value)}
-                className="w-full"
-              >
-                <option value="">All Roles</option>
-                {ROLES.map(role => (
-                  <option key={role.value} value={role.value}>
-                    {role.label}
-                  </option>
-                ))}
+              <Select value={roleFilter} onValueChange={setRoleFilter}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="All Roles" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">All Roles</SelectItem>
+                  {ROLES.map(role => (
+                    <SelectItem key={role.value} value={role.value}>
+                      {role.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
             </div>
             
             <div>
-              <Select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full"
-              >
-                <option value="">All Statuses</option>
-                {USER_STATUS_OPTIONS.map(status => (
-                  <option key={status.value} value={status.value}>
-                    {status.label}
-                  </option>
-                ))}
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="All Statuses" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">All Statuses</SelectItem>
+                  {USER_STATUS_OPTIONS.map(status => (
+                    <SelectItem key={status.value} value={status.value}>
+                      {status.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
             </div>
           </div>

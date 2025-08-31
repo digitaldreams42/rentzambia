@@ -5,10 +5,30 @@ import { Form, FormField, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Select } from "@/components/ui/select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
+
+interface Settings {
+  siteName: string;
+  siteDescription: string;
+  contactEmail: string;
+  contactPhone: string;
+  currency: string;
+  timezone: string;
+  maintenanceMode: boolean;
+  allowRegistration: boolean;
+  requireEmailVerification: boolean;
+  maxPropertiesPerLandlord: number;
+  commissionRate: number;
+}
 
 // Mock settings data
-const mockSettings = {
+const mockSettings: Settings = {
   siteName: "RentZambia",
   siteDescription: "RentZambia connects tenants with landlords and agents to make property rental simple, fast, and secure in Zambia.",
   contactEmail: "support@rentzambia.com",
@@ -23,8 +43,8 @@ const mockSettings = {
 };
 
 export default function AdminSettingsPage() {
-  const [settings, setSettings] = useState(mockSettings);
-  const [formData, setFormData] = useState(mockSettings);
+  const [settings, setSettings] = useState<Settings>(mockSettings);
+  const [formData, setFormData] = useState<Settings>(mockSettings);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +52,11 @@ export default function AdminSettingsPage() {
     alert("Settings saved successfully!");
   };
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = <K extends keyof Settings>(field: K, value: Settings[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleToggle = (field: string) => {
+  const handleToggle = (field: keyof Settings) => {
     setFormData(prev => ({ ...prev, [field]: !prev[field] }));
   };
 
@@ -120,15 +140,18 @@ export default function AdminSettingsPage() {
 
                 <FormField>
                   <FormLabel htmlFor="timezone">Timezone</FormLabel>
-                  <Select
-                    id="timezone"
-                    value={formData.timezone}
-                    onChange={(e) => handleChange("timezone", e.target.value)}
-                    required
+                  <Select 
+                    value={formData.timezone} 
+                    onValueChange={(value) => handleChange("timezone", value)}
                   >
-                    <option value="Africa/Lusaka">Africa/Lusaka</option>
-                    <option value="Africa/Harare">Africa/Harare</option>
-                    <option value="UTC">UTC</option>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select timezone" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Africa/Lusaka">Africa/Lusaka</SelectItem>
+                      <SelectItem value="Africa/Harare">Africa/Harare</SelectItem>
+                      <SelectItem value="UTC">UTC</SelectItem>
+                    </SelectContent>
                   </Select>
                 </FormField>
 

@@ -66,8 +66,14 @@ export class ApiService {
     await new Promise(resolve => setTimeout(resolve, 400));
     const index = mockUsers.findIndex(user => user.id === id);
     if (index !== -1) {
-      mockUsers[index] = { ...mockUsers[index], status };
-      return mockUsers[index];
+      // Create a new object with the updated status, preserving the correct type
+      const user = mockUsers[index];
+      const updatedUser = {
+        ...user,
+        status
+      } as typeof user;
+      mockUsers[index] = updatedUser;
+      return updatedUser;
     }
     throw new Error("User not found");
   }

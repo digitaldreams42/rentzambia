@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -30,14 +36,18 @@ const SearchHeader = React.forwardRef<HTMLDivElement, SearchHeaderProps>(
         </div>
         <div className="flex gap-2">
           <Select 
-            className="px-4 py-2"
-            value={sortBy}
-            onChange={(e) => onSortChange(e.target.value)}
+            value={sortBy} 
+            onValueChange={onSortChange}
           >
-            <option value="relevance">Sort by Relevance</option>
-            <option value="price_low">Price: Low to High</option>
-            <option value="price_high">Price: High to Low</option>
-            <option value="newest">Newest First</option>
+            <SelectTrigger className="px-4 py-2">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="relevance">Sort by Relevance</SelectItem>
+              <SelectItem value="price_low">Price: Low to High</SelectItem>
+              <SelectItem value="price_high">Price: High to Low</SelectItem>
+              <SelectItem value="newest">Newest First</SelectItem>
+            </SelectContent>
           </Select>
           <Button 
             className="px-4 py-2"

@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: [
       'images.pexels.com',
@@ -10,10 +9,7 @@ const nextConfig = {
       'res.cloudinary.com'
     ],
   },
-  experimental: {
-    appDir: true,
-    serverComponentsExternalPackages: ['mongoose'],
-  },
+  serverExternalPackages: ['mongoose'],
   webpack: (config, { isServer }) => {
     // Handle SVG files
     config.module.rules.push({

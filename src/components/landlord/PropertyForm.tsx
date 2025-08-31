@@ -1,287 +1,285 @@
 "use client";
 
-import * as React from "react";
-import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select } from "@/components/ui/select";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { PROPERTY_TYPES, AMENITIES } from "@/data/constants";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ImageUploader } from "@/components/landlord/ImageUploader";
 
-export interface PropertyFormData {
-  title: string;
-  description: string;
-  location: string;
-  price: {
-    monthly: number;
-    yearly: number;
-    shortTerm: number;
-  };
-  bedrooms: number;
-  bathrooms: number;
-  area: number;
-  type: string;
-  furnished: boolean;
-  availableFrom: string;
-  amenities: string[];
-  images: string[];
-}
-
-export interface PropertyFormProps {
-  initialData?: PropertyFormData;
-  onSubmit: (data: PropertyFormData) => void;
+interface PropertyFormProps {
+  property?: any;
+  onSubmit: (data: any) => void;
   onCancel: () => void;
-  isLoading?: boolean;
+  loading?: boolean;
 }
 
-const PropertyForm = React.forwardRef<HTMLFormElement, PropertyFormProps>(
-  ({ initialData, onSubmit, onCancel, isLoading }, ref) => {
-    const [formData, setFormData] = React.useState<PropertyFormData>(
-      initialData || {
-        title: "",
-        description: "",
-        location: "",
-        price: {
-          monthly: 0,
-          yearly: 0,
-          shortTerm: 0
-        },
-        bedrooms: 1,
-        bathrooms: 1,
-        area: 0,
-        type: "apartment",
-        furnished: false,
-        availableFrom: new Date().toISOString().split("T")[0],
-        amenities: [],
-        images: []
-      }
-    );
+export function PropertyForm({ property, onSubmit, onCancel, loading }: PropertyFormProps) {
+  const [title, setTitle] = useState(property?.title || "");
+  const [description, setDescription] = useState(property?.description || "");
+  const [location, setLocation] = useState(property?.location || "");
+  const [propertyType, setPropertyType] = useState(property?.type || "");
+  const [bedrooms, setBedrooms] = useState(property?.bedrooms || 1);
+  const [bathrooms, setBathrooms] = useState(property?.bathrooms || 1);
+  const [area, setArea] = useState(property?.area || 0);
+  const [monthlyPrice, setMonthlyPrice] = useState(property?.price?.monthly || 0);
+  const [yearlyPrice, setYearlyPrice] = useState(property?.price?.yearly || 0);
+  const [shortTermPrice, setShortTermPrice] = useState(property?.price?.shortTerm || 0);
+  const [furnished, setFurnished] = useState(property?.furnished || false);
+  const [availableFrom, setAvailableFrom] = useState(property?.availableFrom || "");
+  const [amenities, setAmenities] = useState<string[]>(property?.amenities || []);
+  const [images, setImages] = useState<string[]>(property?.images || []);
 
-    const [selectedAmenities, setSelectedAmenities] = React.useState<string[]>(
-      initialData?.amenities || []
-    );
+  const availableAmenities = [
+    "WiFi",
+    "Parking",
+    "Security",
+    "Generator",
+    "Swimming Pool",
+    "Gym",
+    "Air Conditioning",
+    "Balcony",
+    "Garden",
+    "Water Tank",
+    "CCTV",
+    "Elevator"
+  ];
 
-    const handleAmenityToggle = (amenity: string) => {
-      const newAmenities = selectedAmenities.includes(amenity)
-        ? selectedAmenities.filter(a => a !== amenity)
-        : [...selectedAmenities, amenity];
-      
-      setSelectedAmenities(newAmenities);
-      setFormData(prev => ({ ...prev, amenities: newAmenities }));
-    };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit({
+      title,
+      description,
+      location,
+      type: propertyType,
+      bedrooms: parseInt(bedrooms.toString()),
+      bathrooms: parseInt(bathrooms.toString()),
+      area: parseInt(area.toString()),
+      price: {
+        monthly: parseInt(monthlyPrice.toString()),
+        yearly: parseInt(yearlyPrice.toString()),
+        shortTerm: parseInt(shortTermPrice.toString())
+      },
+      furnished,
+      availableFrom,
+      amenities,
+      images
+    });
+  };
 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      onSubmit(formData);
-    };
+  const handleAmenityChange = (amenity: string, checked: boolean) => {
+    if (checked) {
+      setAmenities([...amenities, amenity]);
+    } else {
+      setAmenities(amenities.filter(a => a !== amenity));
+    }
+  };
 
-    const handleChange = (field: string, value: any) => {
-      setFormData(prev => ({ ...prev, [field]: value }));
-    };
+  const handleImageUpload = (imageUrl: string) => {
+    setImages([...images, imageUrl]);
+  };
 
-    const handlePriceChange = (type: keyof PropertyFormData["price"], value: string) => {
-      const numValue = value ? Number(value) : 0;
-      setFormData(prev => ({
-        ...prev,
-        price: {
-          ...prev.price,
-          [type]: numValue
-        }
-      }));
-    };
+  const handleImageRemove = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
 
-    return (
-      <Form ref={ref} onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField>
-            <FormLabel htmlFor="title">Property Title</FormLabel>
-            <Input
-              id="title"
-              type="text"
-              value={formData.title}
-              onChange={(e) => handleChange("title", e.target.value)}
-              placeholder="e.g., Modern 2-Bedroom Apartment in Kabulonga"
-              required
-            />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="location">Location</FormLabel>
-            <Input
-              id="location"
-              type="text"
-              value={formData.location}
-              onChange={(e) => handleChange("location", e.target.value)}
-              placeholder="e.g., Kabulonga, Lusaka"
-              required
-            />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="type">Property Type</FormLabel>
-            <Select
-              id="type"
-              value={formData.type}
-              onChange={(e) => handleChange("type", e.target.value)}
-              required
-            >
-              {PROPERTY_TYPES.map(type => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
-            </Select>
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="furnished">Furnished</FormLabel>
-            <Select
-              id="furnished"
-              value={formData.furnished ? "true" : "false"}
-              onChange={(e) => handleChange("furnished", e.target.value === "true")}
-              required
-            >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </Select>
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="bedrooms">Bedrooms</FormLabel>
-            <Input
-              id="bedrooms"
-              type="number"
-              min="1"
-              value={formData.bedrooms}
-              onChange={(e) => handleChange("bedrooms", Number(e.target.value))}
-              required
-            />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="bathrooms">Bathrooms</FormLabel>
-            <Input
-              id="bathrooms"
-              type="number"
-              min="1"
-              value={formData.bathrooms}
-              onChange={(e) => handleChange("bathrooms", Number(e.target.value))}
-              required
-            />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="area">Area (sq. meters)</FormLabel>
-            <Input
-              id="area"
-              type="number"
-              min="1"
-              value={formData.area}
-              onChange={(e) => handleChange("area", Number(e.target.value))}
-              required
-            />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="availableFrom">Available From</FormLabel>
-            <Input
-              id="availableFrom"
-              type="date"
-              value={formData.availableFrom}
-              onChange={(e) => handleChange("availableFrom", e.target.value)}
-              required
-            />
-          </FormField>
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="title">Property Title</Label>
+          <Input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Modern 2-Bedroom Apartment in Kabulonga"
+            required
+          />
         </div>
-
+        
+        <div className="space-y-2">
+          <Label htmlFor="location">Location</Label>
+          <Input
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Kabulonga, Lusaka"
+            required
+          />
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Describe your property in detail..."
+          rows={4}
+          required
+        />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="propertyType">Property Type</Label>
+          <Select value={propertyType} onValueChange={setPropertyType}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Apartment">Apartment</SelectItem>
+              <SelectItem value="House">House</SelectItem>
+              <SelectItem value="Studio">Studio</SelectItem>
+              <SelectItem value="Room">Room</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="bedrooms">Bedrooms</Label>
+          <Input
+            id="bedrooms"
+            type="number"
+            min="0"
+            value={bedrooms}
+            onChange={(e) => setBedrooms(parseInt(e.target.value) || 0)}
+            required
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="bathrooms">Bathrooms</Label>
+          <Input
+            id="bathrooms"
+            type="number"
+            min="0"
+            value={bathrooms}
+            onChange={(e) => setBathrooms(parseInt(e.target.value) || 0)}
+            required
+          />
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="area">Area (sqm)</Label>
+          <Input
+            id="area"
+            type="number"
+            min="0"
+            value={area}
+            onChange={(e) => setArea(parseInt(e.target.value) || 0)}
+            required
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="availableFrom">Available From</Label>
+          <Input
+            id="availableFrom"
+            type="date"
+            value={availableFrom}
+            onChange={(e) => setAvailableFrom(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className="space-y-2 flex items-end">
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="furnished"
+              checked={furnished}
+              onCheckedChange={(checked) => setFurnished(checked as boolean)}
+            />
+            <Label htmlFor="furnished">Furnished</Label>
+          </div>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <Label>Pricing</Label>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <FormField>
-            <FormLabel htmlFor="monthlyPrice">Monthly Price (K)</FormLabel>
+          <div>
+            <Label htmlFor="monthlyPrice" className="text-sm">Monthly (K)</Label>
             <Input
               id="monthlyPrice"
               type="number"
               min="0"
-              value={formData.price.monthly || ""}
-              onChange={(e) => handlePriceChange("monthly", e.target.value)}
-              placeholder="0"
+              value={monthlyPrice}
+              onChange={(e) => setMonthlyPrice(parseInt(e.target.value) || 0)}
               required
             />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="yearlyPrice">Yearly Price (K)</FormLabel>
+          </div>
+          <div>
+            <Label htmlFor="yearlyPrice" className="text-sm">Yearly (K)</Label>
             <Input
               id="yearlyPrice"
               type="number"
               min="0"
-              value={formData.price.yearly || ""}
-              onChange={(e) => handlePriceChange("yearly", e.target.value)}
-              placeholder="0"
+              value={yearlyPrice}
+              onChange={(e) => setYearlyPrice(parseInt(e.target.value) || 0)}
+              required
             />
-          </FormField>
-
-          <FormField>
-            <FormLabel htmlFor="shortTermPrice">Short Term Price (K/day)</FormLabel>
+          </div>
+          <div>
+            <Label htmlFor="shortTermPrice" className="text-sm">Short-term (K/day)</Label>
             <Input
               id="shortTermPrice"
               type="number"
               min="0"
-              value={formData.price.shortTerm || ""}
-              onChange={(e) => handlePriceChange("shortTerm", e.target.value)}
-              placeholder="0"
+              value={shortTermPrice}
+              onChange={(e) => setShortTermPrice(parseInt(e.target.value) || 0)}
+              required
             />
-          </FormField>
-        </div>
-
-        <FormField>
-          <FormLabel htmlFor="description">Description</FormLabel>
-          <Textarea
-            id="description"
-            value={formData.description}
-            onChange={(e) => handleChange("description", e.target.value)}
-            placeholder="Describe your property in detail..."
-            rows={4}
-            required
-          />
-        </FormField>
-
-        <FormField>
-          <FormLabel>Amenities</FormLabel>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {AMENITIES.map(amenity => (
-              <label key={amenity} className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={selectedAmenities.includes(amenity)}
-                  onChange={() => handleAmenityToggle(amenity)}
-                  className="mr-2"
-                />
-                <span className="text-foreground text-sm">{amenity}</span>
-              </label>
-            ))}
           </div>
-        </FormField>
-
-        <div className="flex justify-end space-x-3 pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={onCancel}
-            disabled={isLoading}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? "Saving..." : (initialData ? "Update Property" : "Add Property")}
-          </Button>
         </div>
-      </Form>
-    );
-  }
-);
-PropertyForm.displayName = "PropertyForm";
-
-export { PropertyForm };
+      </div>
+      
+      <div className="space-y-2">
+        <Label>Amenities</Label>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {availableAmenities.map((amenity) => (
+            <div key={amenity} className="flex items-center space-x-2">
+              <Checkbox
+                id={`amenity-${amenity}`}
+                checked={amenities.includes(amenity)}
+                onCheckedChange={(checked) => handleAmenityChange(amenity, checked as boolean)}
+              />
+              <Label htmlFor={`amenity-${amenity}`} className="text-sm">
+                {amenity}
+              </Label>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <Label>Property Images</Label>
+        <ImageUploader 
+          onImageUpload={handleImageUpload}
+          onImageRemove={handleImageRemove}
+          images={images}
+        />
+      </div>
+      
+      <div className="flex justify-end space-x-4 pt-4">
+        <Button type="button" variant="outline" onClick={onCancel} disabled={loading}>
+          Cancel
+        </Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Saving..." : (property ? "Update Property" : "Add Property")}
+        </Button>
+      </div>
+    </form>
+  );
+}

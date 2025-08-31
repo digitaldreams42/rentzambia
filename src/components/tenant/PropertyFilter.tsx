@@ -3,7 +3,13 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { AMENITIES, PROPERTY_TYPES } from "@/data/constants";
 import { cn } from "@/lib/utils";
 
@@ -101,15 +107,23 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
             <label className="block text-sm font-medium text-foreground mb-2">
               Bedrooms
             </label>
-            <Select
-              value={filters.bedrooms?.toString() || ""}
-              onChange={(e) => onFiltersChange({ ...filters, bedrooms: e.target.value ? Number(e.target.value) : null })}
+            <Select 
+              value={filters.bedrooms?.toString() || ""} 
+              onValueChange={(value) => onFiltersChange({ 
+                ...filters, 
+                bedrooms: value ? Number(value) : null 
+              })}
             >
-              <option value="">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4+</option>
+              <SelectTrigger>
+                <SelectValue placeholder="Any" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">Any</SelectItem>
+                <SelectItem value="1">1</SelectItem>
+                <SelectItem value="2">2</SelectItem>
+                <SelectItem value="3">3</SelectItem>
+                <SelectItem value="4">4+</SelectItem>
+              </SelectContent>
             </Select>
           </div>
 
@@ -118,16 +132,21 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
             <label className="block text-sm font-medium text-foreground mb-2">
               Property Type
             </label>
-            <Select
-              value={filters.propertyType || ""}
-              onChange={(e) => onFiltersChange({ ...filters, propertyType: e.target.value })}
+            <Select 
+              value={filters.propertyType || ""} 
+              onValueChange={(value) => onFiltersChange({ ...filters, propertyType: value })}
             >
-              <option value="">Any</option>
-              {PROPERTY_TYPES.map(type => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
+              <SelectTrigger>
+                <SelectValue placeholder="Any" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">Any</SelectItem>
+                {PROPERTY_TYPES.map(type => (
+                  <SelectItem key={type.value} value={type.value}>
+                    {type.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
             </Select>
           </div>
 

@@ -99,8 +99,8 @@ export const mockUsers = [
     id: 1,
     name: "John Mwanza",
     email: "john.mwanza@email.com",
-    role: "tenant",
-    status: "active",
+    role: "tenant" as const,
+    status: "active" as const,
     properties: 0,
     joinDate: "2025-01-15"
   },
@@ -108,8 +108,8 @@ export const mockUsers = [
     id: 2,
     name: "Sarah Banda",
     email: "sarah.banda@rentzambia.com",
-    role: "landlord",
-    status: "active",
+    role: "landlord" as const,
+    status: "active" as const,
     properties: 3,
     joinDate: "2024-11-22"
   },
@@ -117,8 +117,8 @@ export const mockUsers = [
     id: 3,
     name: "David Phiri",
     email: "david.phiri@agency.com",
-    role: "agent",
-    status: "pending",
+    role: "agent" as const,
+    status: "pending" as const,
     properties: 0,
     joinDate: "2025-02-10"
   },
@@ -126,8 +126,8 @@ export const mockUsers = [
     id: 4,
     name: "Mary Chanda",
     email: "mary.chanda@rentzambia.com",
-    role: "landlord",
-    status: "suspended",
+    role: "landlord" as const,
+    status: "suspended" as const,
     properties: 2,
     joinDate: "2024-09-05"
   }
@@ -143,7 +143,7 @@ export const mockInquiries = [
     userPhone: "+260 97 123 4567",
     message: "I'm interested in this property. When can I schedule a visit?",
     date: "2025-02-15",
-    status: "pending"
+    status: "pending" as const
   },
   {
     id: 2,
@@ -154,6 +154,6 @@ export const mockInquiries = [
     userPhone: "+260 96 987 6543",
     message: "Representing a client who is very interested in this property. Can we arrange a viewing next week?",
     date: "2025-02-14",
-    status: "responded"
+    status: "responded" as const
   }
 ];

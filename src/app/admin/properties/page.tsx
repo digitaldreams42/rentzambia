@@ -4,7 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PropertyStatusBadge } from "@/components/property/PropertyStatusBadge";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { PROPERTY_TYPES } from "@/data/constants";
 
 // Mock property data
@@ -14,6 +20,7 @@ const mockProperties = [
     title: "Modern 2-Bedroom Apartment in Kabulonga",
     location: "Kabulonga, Lusaka",
     price: 3500,
+    type: "Apartment",
     status: "published",
     views: 124,
     landlord: {
@@ -25,6 +32,7 @@ const mockProperties = [
     title: "Spacious 3-Bedroom House in Roma",
     location: "Roma, Lusaka",
     price: 4200,
+    type: "House",
     status: "pending",
     views: 0,
     landlord: {
@@ -36,6 +44,7 @@ const mockProperties = [
     title: "Luxury Studio in City Center",
     location: "City Center, Lusaka",
     price: 2800,
+    type: "Studio",
     status: "published",
     views: 87,
     landlord: {
@@ -112,31 +121,33 @@ export default function AdminPropertiesPage() {
             </div>
             
             <div>
-              <Select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full"
-              >
-                <option value="">All Statuses</option>
-                <option value="published">Published</option>
-                <option value="pending">Pending</option>
-                <option value="rejected">Rejected</option>
-                <option value="draft">Draft</option>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="All Statuses" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">All Statuses</SelectItem>
+                  <SelectItem value="published">Published</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
+                  <SelectItem value="draft">Draft</SelectItem>
+                </SelectContent>
               </Select>
             </div>
             
             <div>
-              <Select
-                value={typeFilter}
-                onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full"
-              >
-                <option value="">All Types</option>
-                {PROPERTY_TYPES.map(type => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="All Types" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">All Types</SelectItem>
+                  {PROPERTY_TYPES.map(type => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
             </div>
           </div>

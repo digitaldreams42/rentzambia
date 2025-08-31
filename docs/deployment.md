@@ -1,367 +1,169 @@
 # Deployment Guide
 
-This document provides instructions for deploying the RentZambia application to various environments.
+This guide explains how to deploy the RentZambia application to production.
 
 ## Prerequisites
 
-Before deploying, ensure you have:
-
-1. Node.js 18.x or later installed
-2. npm 9.x or later installed
-3. Access to deployment environment (Vercel, hosting provider, etc.)
-4. Environment variables configured
-5. Database access (if using external database)
+1. Node.js >= 18.17.0
+2. npm >= 9.0.0
+3. A Firebase project
+4. A Cloudinary account
+5. A SendGrid account (for email delivery)
 
 ## Environment Variables
 
-Create a `.env.local` file in the root directory with the following variables:
+Create a `.env.production` file with the following variables:
 
-```env
-# Application Settings
+```
+# Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
+
+# Application Configuration
 NEXT_PUBLIC_APP_NAME=RentZambia
 NEXT_PUBLIC_APP_URL=https://yourdomain.com
 
-# Authentication
-NEXTAUTH_URL=https://yourdomain.com
-NEXTAUTH_SECRET=your_nextauth_secret_here
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
-# Database (if using external database)
-DATABASE_URL=your_database_connection_string
-
-# API Keys (if using external services)
-CLOUDINARY_URL=your_cloudinary_url
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_token
-
-# Email Service
-EMAIL_SERVER=your_email_server_config
-EMAIL_FROM=noreply@yourdomain.com
-
-# Payment Processing (if using Stripe/PayPal)
-STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+# Email Configuration
+SENDGRID_API_KEY=your_sendgrid_api_key
 ```
 
-## Local Development Deployment
+## Building the Application
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Run the development server:
+2. Run tests to ensure everything works:
    ```bash
-   npm run dev
+   npm run test
+   npm run test:e2e
    ```
 
-3. Access the application at `http://localhost:3000`
-
-## Production Build
-
-1. Create a production build:
+3. Build the application:
    ```bash
    npm run build
    ```
 
-2. Start the production server:
-   ```bash
-   npm start
-   ```
+## Deploying to Vercel
 
-## Vercel Deployment
-
-### Automatic Deployment
-
-1. Connect your GitHub repository to Vercel
-2. Vercel will automatically detect the Next.js framework
-3. Configure environment variables in the Vercel dashboard
-4. Deployments will automatically trigger on pushes to the main branch
-
-### Manual Deployment
-
-1. Install Vercel CLI:
+1. Install the Vercel CLI:
    ```bash
    npm install -g vercel
    ```
 
-2. Deploy to Vercel:
+2. Login to your Vercel account:
+   ```bash
+   vercel login
+   ```
+
+3. Deploy the application:
    ```bash
    vercel --prod
    ```
 
-## Docker Deployment
+## Setting up Firebase
 
-### Building the Docker Image
+1. Create a Firebase project at https://console.firebase.google.com/
 
-1. Build the Docker image:
-   ```bash
-   docker build -t rentzambia .
-   ```
+2. Enable Authentication with Email/Password and Google providers
 
-2. Run the container:
-   ```bash
-   docker run -p 3000:3000 rentzambia
-   ```
+3. Set up Firestore database with the following collections:
+   - `users`
+   - `properties`
+   - `inquiries`
+   - `bookings`
+   - `notifications`
 
-### Docker Compose
+4. Set up Cloud Storage for property images
 
-Create a `docker-compose.yml` file:
+## Setting up Cloudinary
 
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - .env.local
-```
+1. Create a Cloudinary account at https://cloudinary.com/
 
-Run with Docker Compose:
-```bash
-docker-compose up -d
-```
+2. Get your Cloud Name, API Key, and API Secret from the Dashboard
 
-## Nginx Configuration
+3. Set up an upload preset for property images
 
-For production deployments behind Nginx, use the following configuration:
+## Setting up SendGrid
 
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
+1. Create a SendGrid account at https://sendgrid.com/
 
-## SSL Configuration
+2. Create an API key with full access to email sending
 
-For HTTPS, obtain SSL certificates using Let's Encrypt:
+3. Verify your sender identity
 
-1. Install Certbot:
-   ```bash
-   sudo apt-get install certbot python3-certbot-nginx
-   ```
+## Monitoring and Analytics
 
-2. Obtain certificates:
-   ```bash
-   sudo certbot --nginx -d yourdomain.com
-   ```
+The application uses the following services for monitoring:
 
-## Database Deployment
-
-### MongoDB (if using MongoDB)
-
-1. Set up MongoDB Atlas or install MongoDB locally
-2. Configure the connection string in environment variables
-3. Ensure proper network access and firewall rules
-
-### PostgreSQL (if using PostgreSQL)
-
-1. Set up PostgreSQL database
-2. Run database migrations:
-   ```bash
-   npm run db:migrate
-   ```
+1. Vercel Analytics for web vitals and performance metrics
+2. Firebase Analytics for user behavior tracking
+3. Sentry for error tracking (optional)
 
 ## CI/CD Pipeline
 
-### GitHub Actions
+The project includes GitHub Actions for continuous integration:
 
-Create `.github/workflows/deploy.yml`:
+1. Code is automatically tested on every push to the `main` branch
+2. Code is automatically deployed to production on every tag push
 
-```yaml
-name: Deploy to Vercel
+To set up CI/CD:
 
-on:
-  push:
-    branches: [main]
+1. Add your environment variables as GitHub Secrets
+2. Ensure your GitHub repository has the proper permissions
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run tests
-      run: npm test
-      
-    - name: Deploy to Vercel
-      run: npx vercel --token $VERCEL_TOKEN --prod
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-```
+## Backup and Recovery
 
-## Monitoring and Logging
-
-### Application Monitoring
-
-Set up monitoring with tools like:
-
-1. **Vercel Analytics** - Built-in analytics for Vercel deployments
-2. **Sentry** - Error tracking and performance monitoring
-3. **LogRocket** - Session replay and product analytics
-
-### Log Management
-
-Configure logging with:
-
-1. **Winston** - For application logging
-2. **Papertrail** - For log aggregation
-3. **Datadog** - For infrastructure monitoring
-
-## Backup Strategy
-
-### Code Backup
-
-1. Regular Git commits and pushes
-2. GitHub repository backups
-3. Branch protection rules
-
-### Data Backup
-
-1. Database backups (daily/weekly)
-2. File storage backups (Cloudinary, etc.)
-3. Configuration backups
+1. Regular backups of the Firebase Firestore database are recommended
+2. Property images in Cloudinary should be backed up periodically
+3. User data should be exported regularly for compliance purposes
 
 ## Security Considerations
 
-### Application Security
-
-1. Keep dependencies up to date:
-   ```bash
-   npm audit
-   npm audit fix
-   ```
-
-2. Use environment variables for secrets
-3. Implement proper authentication and authorization
-4. Validate and sanitize all user inputs
-5. Use HTTPS in production
-
-### Network Security
-
-1. Configure firewall rules
-2. Use reverse proxy (Nginx)
-3. Implement rate limiting
-4. Secure database connections
-
-## Performance Optimization
-
-### Build Optimization
-
-1. Optimize images with Next.js Image component
-2. Use code splitting and dynamic imports
-3. Implement caching strategies
-4. Minimize bundle size
-
-### Runtime Optimization
-
-1. Enable compression (gzip/brotli)
-2. Use CDN for static assets
-3. Implement server-side rendering
-4. Optimize database queries
-
-## Scaling
-
-### Horizontal Scaling
-
-1. Use load balancers
-2. Implement session management
-3. Use external caching (Redis)
-4. Database connection pooling
-
-### Vertical Scaling
-
-1. Increase server resources
-2. Optimize database performance
-3. Implement caching layers
+1. All API keys should be stored as environment variables
+2. Firebase rules should be configured to prevent unauthorized access
+3. HTTPS should be enforced in production
+4. Content Security Policy should be implemented
+5. Regular security audits should be performed
 
 ## Troubleshooting
 
-### Common Issues
+### Build Issues
 
-1. **Build failures**: Check Node.js version compatibility
-2. **Deployment errors**: Verify environment variables
-3. **Performance issues**: Check resource utilization
-4. **Database connection**: Verify connection strings and network access
+If the build fails, check:
 
-### Debugging
+1. All environment variables are set correctly
+2. Dependencies are up to date
+3. There are no TypeScript errors
 
-1. Check application logs
-2. Use monitoring tools
-3. Enable debug mode if needed
-4. Review error traces
+### Deployment Issues
 
-## Maintenance
+If deployment fails, check:
 
-### Regular Tasks
+1. Vercel project settings
+2. Domain configuration
+3. Custom server configuration (if applicable)
 
-1. Update dependencies
-2. Review security vulnerabilities
-3. Monitor application performance
-4. Check backup integrity
-5. Review logs for errors
+### Performance Issues
 
-### Updates
+If the application is slow, check:
 
-1. Test updates in staging environment
-2. Backup before major updates
-3. Follow semantic versioning
-4. Document changes
-
-## Rollback Procedures
-
-### Code Rollback
-
-1. Revert Git commits
-2. Deploy previous version
-3. Monitor for issues
-
-### Data Rollback
-
-1. Restore database from backup
-2. Restore file storage
-3. Update configuration if needed
+1. Image optimization settings
+2. Database query performance
+3. Third-party API response times
+4. Bundle size optimization
 
 ## Support
 
-For deployment issues, contact:
-- Development team
-- Hosting provider support
-- Community forums
-
-## Version History
-
-- v1.0.0: Initial deployment
-- v1.1.0: Added monitoring and logging
-- v1.2.0: Implemented CI/CD pipeline
-
-## License
-
-This deployment guide is part of the RentZambia project and is licensed under the MIT License.
+For support, contact the development team or check the project documentation.
