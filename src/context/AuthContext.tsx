@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
   const [userData, setUserData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   async function login(email: string, password: string) {
     // In a real implementation, you would use:
@@ -72,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
+    setMounted(true);
     const unsubscribe = onAuthStateChanged(auth, async user => {
       setCurrentUser(user);
 
@@ -103,6 +105,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     logout,
     register,
   };
+
+  // To prevent hydration mismatch, we don't render anything until mounted
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={value}>

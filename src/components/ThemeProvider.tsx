@@ -15,8 +15,10 @@ const ThemeContext = React.createContext<ThemeContextType | undefined>(
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = React.useState<Theme>('light');
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setMounted(true);
     // Check for saved theme or system preference
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     const systemPrefersDark = window.matchMedia(
@@ -31,6 +33,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   React.useEffect(() => {
+    if (!mounted) return;
+    
     // Apply theme to document
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -40,7 +44,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     // Save theme preference
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
@@ -50,6 +54,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     theme,
     toggleTheme,
   };
+
+  // To prevent hydration mismatch, we don't render anything until mounted
+  if (!mounted) {
+    return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  }
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
