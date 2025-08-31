@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export interface UserCardProps {
   user: {
@@ -11,7 +11,7 @@ export interface UserCardProps {
     name: string;
     email: string;
     role: string;
-    status: "active" | "pending" | "suspended";
+    status: 'active' | 'pending' | 'suspended';
     properties: number;
     joinDate: string;
   };
@@ -25,29 +25,42 @@ const UserCard = React.forwardRef<HTMLDivElement, UserCardProps>(
   ({ user, onApprove, onSuspend, onViewDetails, className }, ref) => {
     const getStatusColor = (status: string) => {
       switch (status) {
-        case "active": return "bg-success";
-        case "pending": return "bg-warning";
-        case "suspended": return "bg-destructive";
-        default: return "bg-muted";
+        case 'active':
+          return 'bg-success';
+        case 'pending':
+          return 'bg-warning';
+        case 'suspended':
+          return 'bg-destructive';
+        default:
+          return 'bg-muted';
       }
     };
 
     const getStatusText = (status: string) => {
       switch (status) {
-        case "active": return "Active";
-        case "pending": return "Pending";
-        case "suspended": return "Suspended";
-        default: return "Unknown";
+        case 'active':
+          return 'Active';
+        case 'pending':
+          return 'Pending';
+        case 'suspended':
+          return 'Suspended';
+        default:
+          return 'Unknown';
       }
     };
 
     return (
-      <Card ref={ref} className={cn("rounded-lg border border-border", className)}>
+      <Card
+        ref={ref}
+        className={cn('rounded-lg border border-border', className)}
+      >
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             {user.name}
           </CardTitle>
-          <div className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getStatusColor(user.status)}`}>
+          <div
+            className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getStatusColor(user.status)}`}
+          >
             {getStatusText(user.status)}
           </div>
         </CardHeader>
@@ -70,11 +83,11 @@ const UserCard = React.forwardRef<HTMLDivElement, UserCardProps>(
               <span className="text-foreground">{user.joinDate}</span>
             </div>
           </div>
-          
+
           <div className="flex gap-2 mt-4">
-            {user.status === "pending" && onApprove && (
-              <Button 
-                variant="default" 
+            {user.status === 'pending' && onApprove && (
+              <Button
+                variant="default"
                 size="sm"
                 onClick={() => onApprove(user.id)}
                 className="flex-1"
@@ -82,9 +95,9 @@ const UserCard = React.forwardRef<HTMLDivElement, UserCardProps>(
                 Approve
               </Button>
             )}
-            {user.status !== "suspended" && onSuspend && (
-              <Button 
-                variant="outline" 
+            {user.status !== 'suspended' && onSuspend && (
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={() => onSuspend(user.id)}
                 className="flex-1"
@@ -93,8 +106,8 @@ const UserCard = React.forwardRef<HTMLDivElement, UserCardProps>(
               </Button>
             )}
             {onViewDetails && (
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={() => onViewDetails(user.id)}
                 className="flex-1"
@@ -108,6 +121,6 @@ const UserCard = React.forwardRef<HTMLDivElement, UserCardProps>(
     );
   }
 );
-UserCard.displayName = "UserCard";
+UserCard.displayName = 'UserCard';
 
 export { UserCard };

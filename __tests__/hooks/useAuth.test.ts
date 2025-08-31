@@ -52,7 +52,7 @@ describe('useAuth', () => {
 
   it('calls login function', async () => {
     const { result } = renderHook(() => useAuth());
-    
+
     await act(async () => {
       await result.current.login('john@example.com', 'password123');
     });
@@ -62,7 +62,7 @@ describe('useAuth', () => {
 
   it('calls logout function', async () => {
     const { result } = renderHook(() => useAuth());
-    
+
     await act(async () => {
       await result.current.logout();
     });
@@ -80,7 +80,7 @@ describe('useAuth', () => {
     };
 
     const { result } = renderHook(() => useAuth());
-    
+
     await act(async () => {
       await result.current.register(mockData);
     });

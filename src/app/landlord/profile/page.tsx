@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from 'react';
+import { Form, FormField, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 // Mock landlord data
 const mockLandlord = {
   id: 1,
-  name: "Sarah Banda",
-  email: "sarah.banda@rentzambia.com",
-  phone: "+260 97 123 4567",
-  role: "landlord",
-  joinDate: "2024-11-22",
-  bio: "Experienced landlord with multiple properties in prime locations across Lusaka. I pride myself on maintaining high-quality properties and providing excellent service to tenants.",
-  company: "Banda Property Management",
-  licenseNumber: "LIC-2024-001",
-  propertiesManaged: 12
+  name: 'Sarah Banda',
+  email: 'sarah.banda@rentzambia.com',
+  phone: '+260 97 123 4567',
+  role: 'landlord',
+  joinDate: '2024-11-22',
+  bio: 'Experienced landlord with multiple properties in prime locations across Lusaka. I pride myself on maintaining high-quality properties and providing excellent service to tenants.',
+  company: 'Banda Property Management',
+  licenseNumber: 'LIC-2024-001',
+  propertiesManaged: 12,
 };
 
 export default function LandlordProfilePage() {
@@ -44,7 +44,7 @@ export default function LandlordProfilePage() {
             <div className="flex items-center">
               <h1 className="text-xl font-bold text-foreground">My Profile</h1>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <button className="text-foreground hover:text-primary">
                 Notifications
@@ -67,11 +67,13 @@ export default function LandlordProfilePage() {
               <h2 className="text-2xl font-bold text-foreground">
                 Profile Information
               </h2>
-              <Button 
-                variant={isEditing ? "outline" : "default"}
-                onClick={() => isEditing ? setIsEditing(false) : setIsEditing(true)}
+              <Button
+                variant={isEditing ? 'outline' : 'default'}
+                onClick={() =>
+                  isEditing ? setIsEditing(false) : setIsEditing(true)
+                }
               >
-                {isEditing ? "Cancel" : "Edit Profile"}
+                {isEditing ? 'Cancel' : 'Edit Profile'}
               </Button>
             </div>
 
@@ -84,7 +86,7 @@ export default function LandlordProfilePage() {
                       id="name"
                       type="text"
                       value={formData.name}
-                      onChange={(e) => handleChange("name", e.target.value)}
+                      onChange={e => handleChange('name', e.target.value)}
                       required
                     />
                   </FormField>
@@ -95,7 +97,7 @@ export default function LandlordProfilePage() {
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleChange("email", e.target.value)}
+                      onChange={e => handleChange('email', e.target.value)}
                       required
                     />
                   </FormField>
@@ -106,7 +108,7 @@ export default function LandlordProfilePage() {
                       id="phone"
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => handleChange("phone", e.target.value)}
+                      onChange={e => handleChange('phone', e.target.value)}
                       required
                     />
                   </FormField>
@@ -127,17 +129,21 @@ export default function LandlordProfilePage() {
                       id="company"
                       type="text"
                       value={formData.company}
-                      onChange={(e) => handleChange("company", e.target.value)}
+                      onChange={e => handleChange('company', e.target.value)}
                     />
                   </FormField>
 
                   <FormField>
-                    <FormLabel htmlFor="licenseNumber">License Number</FormLabel>
+                    <FormLabel htmlFor="licenseNumber">
+                      License Number
+                    </FormLabel>
                     <Input
                       id="licenseNumber"
                       type="text"
                       value={formData.licenseNumber}
-                      onChange={(e) => handleChange("licenseNumber", e.target.value)}
+                      onChange={e =>
+                        handleChange('licenseNumber', e.target.value)
+                      }
                     />
                   </FormField>
                 </div>
@@ -147,15 +153,13 @@ export default function LandlordProfilePage() {
                   <Textarea
                     id="bio"
                     value={formData.bio}
-                    onChange={(e) => handleChange("bio", e.target.value)}
+                    onChange={e => handleChange('bio', e.target.value)}
                     rows={4}
                   />
                 </FormField>
 
                 <div className="flex justify-end">
-                  <Button type="submit">
-                    Save Changes
-                  </Button>
+                  <Button type="submit">Save Changes</Button>
                 </div>
               </Form>
             ) : (
@@ -163,39 +167,61 @@ export default function LandlordProfilePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <p className="text-sm text-muted-foreground">Full Name</p>
-                    <p className="font-medium text-foreground">{landlord.name}</p>
+                    <p className="font-medium text-foreground">
+                      {landlord.name}
+                    </p>
                   </div>
 
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-medium text-foreground">{landlord.email}</p>
+                    <p className="font-medium text-foreground">
+                      {landlord.email}
+                    </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Phone Number</p>
-                    <p className="font-medium text-foreground">{landlord.phone}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Phone Number
+                    </p>
+                    <p className="font-medium text-foreground">
+                      {landlord.phone}
+                    </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Member Since</p>
+                    <p className="text-sm text-muted-foreground">
+                      Member Since
+                    </p>
                     <p className="font-medium text-foreground">
                       {new Date(landlord.joinDate).toLocaleDateString()}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Company Name</p>
-                    <p className="font-medium text-foreground">{landlord.company}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Company Name
+                    </p>
+                    <p className="font-medium text-foreground">
+                      {landlord.company}
+                    </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">License Number</p>
-                    <p className="font-medium text-foreground">{landlord.licenseNumber}</p>
+                    <p className="text-sm text-muted-foreground">
+                      License Number
+                    </p>
+                    <p className="font-medium text-foreground">
+                      {landlord.licenseNumber}
+                    </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Properties Managed</p>
-                    <p className="font-medium text-foreground">{landlord.propertiesManaged}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Properties Managed
+                    </p>
+                    <p className="font-medium text-foreground">
+                      {landlord.propertiesManaged}
+                    </p>
                   </div>
                 </div>
 

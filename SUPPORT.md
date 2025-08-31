@@ -82,11 +82,13 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 ## Response Times
 
 ### Community Support
+
 - **GitHub Issues**: Within 24-48 hours
 - **GitHub Discussions**: Within 24 hours
 - **Stack Overflow**: Community-driven response times
 
 ### Commercial Support
+
 - **Email**: Within 4 hours (business hours)
 - **Phone**: Immediate (business hours)
 - **Urgent Issues**: 24/7 emergency support
@@ -96,6 +98,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 ### Common Issues
 
 #### Installation Problems
+
 ```bash
 # Clear npm cache
 npm cache clean --force
@@ -106,6 +109,7 @@ npm install
 ```
 
 #### Development Server Issues
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -115,6 +119,7 @@ npm run dev
 ```
 
 #### Build Failures
+
 ```bash
 # Check for TypeScript errors
 npm run type-check
@@ -129,7 +134,9 @@ npm test
 ### Environment Issues
 
 #### Node.js Version
+
 Ensure you're using the correct Node.js version:
+
 ```bash
 # Check current version
 node --version
@@ -139,7 +146,9 @@ nvm use
 ```
 
 #### Environment Variables
+
 Check that all required environment variables are set:
+
 ```bash
 # Create .env.local file
 cp .env.example .env.local
@@ -151,6 +160,7 @@ nano .env.local
 ## Professional Services
 
 ### Consulting
+
 We offer professional consulting services for:
 
 - Custom development
@@ -160,6 +170,7 @@ We offer professional consulting services for:
 - Training and workshops
 
 ### Training
+
 We provide training programs for:
 
 - Developers
@@ -167,6 +178,7 @@ We provide training programs for:
 - End users
 
 ### Migration Services
+
 We assist with:
 
 - Data migration from legacy systems
@@ -176,20 +188,24 @@ We assist with:
 ## Contact Information
 
 ### General Inquiries
+
 - **Email**: info@rentzambia.com
 - **Phone**: +260 97 123 4567
 - **Address**: 123 Tech Street, Lusaka, Zambia
 
 ### Sales
+
 - **Email**: sales@rentzambia.com
 - **Phone**: +260 97 123 4568
 
 ### Support
+
 - **Email**: support@rentzambia.com
 - **Phone**: +260 97 123 4567
 - **Hours**: 24/7 (automated), Business hours (live support)
 
 ### Partnerships
+
 - **Email**: partners@rentzambia.com
 - **Phone**: +260 97 123 4569
 

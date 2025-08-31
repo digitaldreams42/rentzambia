@@ -40,11 +40,13 @@ SENDGRID_API_KEY=your_sendgrid_api_key
 ## Building the Application
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Run tests to ensure everything works:
+
    ```bash
    npm run test
    npm run test:e2e
@@ -58,11 +60,13 @@ SENDGRID_API_KEY=your_sendgrid_api_key
 ## Deploying to Vercel
 
 1. Install the Vercel CLI:
+
    ```bash
    npm install -g vercel
    ```
 
 2. Login to your Vercel account:
+
    ```bash
    vercel login
    ```

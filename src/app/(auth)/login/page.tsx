@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { AuthForm } from "@/components/auth/AuthForm";
-import { OTPModal } from "@/components/auth/OTPModal";
-import { TwoFactorModal } from "@/components/auth/TwoFactorModal";
-import { AuthService } from "@/services/authService";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { AuthForm } from '@/components/auth/AuthForm';
+import { OTPModal } from '@/components/auth/OTPModal';
+import { TwoFactorModal } from '@/components/auth/TwoFactorModal';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { AuthService } from '@/services/authService';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,67 +21,68 @@ export default function LoginPage() {
   const handleSubmit = async (data: any) => {
     setIsLoading(true);
     setAuthError(null);
-    
+
     try {
       const response = await AuthService.login(data.email, data.password);
-      
+
       if (response.success) {
         // Check if 2FA is required
-        if (Math.random() > 0.7) { // Simulate 2FA requirement
+        if (Math.random() > 0.7) {
+          // Simulate 2FA requirement
           setShowTwoFactorModal(true);
         } else {
           // Redirect to appropriate dashboard
           router.push(`/${data.role}`);
         }
       } else {
-        setAuthError(response.error || "Failed to login");
+        setAuthError(response.error || 'Failed to login');
       }
     } catch (error: any) {
-      setAuthError(error.message || "An unexpected error occurred");
+      setAuthError(error.message || 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleOTPVerify = async (otp: string) => {
+  const handleOTPVerify = async () => {
     // Simulate OTP verification
     setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setShowOTPModal(false);
     setIsLoading(false);
     // Redirect to dashboard
-    router.push("/tenant");
+    router.push('/tenant');
   };
 
-  const handleTwoFactorVerify = async (code: string) => {
+  const handleTwoFactorVerify = async () => {
     // Simulate 2FA verification
     setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setShowTwoFactorModal(false);
     setIsLoading(false);
     // Redirect to dashboard
-    router.push("/landlord");
+    router.push('/landlord');
   };
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     try {
       const response = await AuthService.signInWithGoogle();
-      
+
       if (response.success) {
-        router.push("/tenant");
+        router.push('/tenant');
       } else {
-        setAuthError(response.error || "Failed to login with Google");
+        setAuthError(response.error || 'Failed to login with Google');
       }
     } catch (error: any) {
-      setAuthError(error.message || "An unexpected error occurred");
+      setAuthError(error.message || 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleForgotPassword = () => {
-    router.push("/reset-password");
+    router.push('/reset-password');
   };
 
   return (
@@ -88,7 +90,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground">RentZambia</h1>
-          <p className="text-muted-foreground mt-2">Find your perfect rental property</p>
+          <p className="text-muted-foreground mt-2">
+            Find your perfect rental property
+          </p>
         </div>
 
         <div className="bg-card rounded-lg shadow-md p-6">
@@ -98,11 +102,11 @@ export default function LoginPage() {
                 {authError}
               </div>
             )}
-            
-            <AuthForm 
-              type="login" 
-              onSubmit={handleSubmit} 
-              isLoading={isLoading} 
+
+            <AuthForm
+              type="login"
+              onSubmit={handleSubmit}
+              isLoading={isLoading}
             />
 
             <div className="relative">
@@ -132,7 +136,7 @@ export default function LoginPage() {
             </Button>
 
             <div className="text-center text-sm">
-              <button 
+              <button
                 onClick={handleForgotPassword}
                 className="text-primary hover:underline"
                 disabled={isLoading}

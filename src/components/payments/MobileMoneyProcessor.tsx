@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Icons } from "@/components/ui/icons";
+} from '@/components/ui/select';
+import { Icons } from '@/components/ui/icons';
 
 interface MobileMoneyProcessorProps {
   amount: number;
@@ -19,10 +19,14 @@ interface MobileMoneyProcessorProps {
   loading?: boolean;
 }
 
-export function MobileMoneyProcessor({ amount, onPayment, loading }: MobileMoneyProcessorProps) {
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [network, setNetwork] = useState("mtn");
-  const [transactionId, setTransactionId] = useState("");
+export function MobileMoneyProcessor({
+  amount,
+  onPayment,
+  loading,
+}: MobileMoneyProcessorProps) {
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [network, setNetwork] = useState('mtn');
+  const [transactionId, setTransactionId] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,19 +34,23 @@ export function MobileMoneyProcessor({ amount, onPayment, loading }: MobileMoney
       amount,
       mobileNumber,
       network,
-      transactionId
+      transactionId,
     });
   };
 
   return (
     <div className="bg-card rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold text-foreground mb-4">Mobile Money Payment</h2>
-      
+      <h2 className="text-xl font-semibold text-foreground mb-4">
+        Mobile Money Payment
+      </h2>
+
       <div className="space-y-4">
         <div className="bg-muted rounded-lg p-4 text-center">
-          <p className="text-lg font-semibold">Total Amount: K{amount.toLocaleString()}</p>
+          <p className="text-lg font-semibold">
+            Total Amount: K{amount.toLocaleString()}
+          </p>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="network">Network</Label>
@@ -72,29 +80,29 @@ export function MobileMoneyProcessor({ amount, onPayment, loading }: MobileMoney
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="mobileNumber">Mobile Number</Label>
             <Input
               id="mobileNumber"
               type="tel"
               value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
+              onChange={e => setMobileNumber(e.target.value)}
               placeholder="+260 XXX XXX XXX"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="transactionId">Transaction ID (Optional)</Label>
             <Input
               id="transactionId"
               value={transactionId}
-              onChange={(e) => setTransactionId(e.target.value)}
+              onChange={e => setTransactionId(e.target.value)}
               placeholder="Enter transaction reference if available"
             />
           </div>
-          
+
           <div className="bg-info/10 rounded-lg p-4">
             <h3 className="font-medium text-info flex items-center">
               <Icons.info className="w-4 h-4 mr-2" />
@@ -109,7 +117,7 @@ export function MobileMoneyProcessor({ amount, onPayment, loading }: MobileMoney
               <li>After successful payment, enter the transaction ID above</li>
             </ol>
           </div>
-          
+
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? (
               <span className="flex items-center">
@@ -117,7 +125,7 @@ export function MobileMoneyProcessor({ amount, onPayment, loading }: MobileMoney
                 Processing Payment...
               </span>
             ) : (
-              "Confirm Payment"
+              'Confirm Payment'
             )}
           </Button>
         </form>

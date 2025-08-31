@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 interface VisitSchedulerProps {
   propertyId: number;
@@ -26,12 +26,16 @@ interface VisitSchedulerProps {
   loading?: boolean;
 }
 
-export function VisitScheduler({ propertyId, onSchedule, loading }: VisitSchedulerProps) {
+export function VisitScheduler({
+  propertyId,
+  onSchedule,
+  loading,
+}: VisitSchedulerProps) {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [message, setMessage] = useState("");
-  const [visitType, setVisitType] = useState("in-person");
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [message, setMessage] = useState('');
+  const [visitType, setVisitType] = useState('in-person');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +44,7 @@ export function VisitScheduler({ propertyId, onSchedule, loading }: VisitSchedul
       date,
       time,
       message,
-      visitType
+      visitType,
     });
     setOpen(false);
   };
@@ -61,22 +65,22 @@ export function VisitScheduler({ propertyId, onSchedule, loading }: VisitSchedul
               id="date"
               type="date"
               value={date}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={e => setDate(e.target.value)}
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="time">Time</Label>
             <Input
               id="time"
               type="time"
               value={time}
-              onChange={(e) => setTime(e.target.value)}
+              onChange={e => setTime(e.target.value)}
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="visitType">Visit Type</Label>
             <Select value={visitType} onValueChange={setVisitType}>
@@ -89,23 +93,27 @@ export function VisitScheduler({ propertyId, onSchedule, loading }: VisitSchedul
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="message">Message (Optional)</Label>
             <Textarea
               id="message"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={e => setMessage(e.target.value)}
               placeholder="Any special requests or notes for the landlord..."
             />
           </div>
-          
+
           <div className="flex justify-end space-x-2 pt-4">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setOpen(false)}
+            >
               Cancel
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? "Scheduling..." : "Schedule Visit"}
+              {loading ? 'Scheduling...' : 'Schedule Visit'}
             </Button>
           </div>
         </form>

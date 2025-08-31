@@ -41,29 +41,34 @@ involving the following steps:
 The RentZambia project implements the following security measures:
 
 ### Authentication and Authorization
+
 - JWT-based authentication
 - Role-based access control
 - Secure password hashing
 - Session management
 
 ### Data Protection
+
 - Input validation and sanitization
 - SQL injection prevention
 - Cross-site scripting (XSS) protection
 - Cross-site request forgery (CSRF) protection
 
 ### Network Security
+
 - HTTPS enforcement
 - Security headers
 - Rate limiting
 - CORS configuration
 
 ### Dependency Management
+
 - Regular security audits
 - Automated vulnerability scanning
 - Dependency update policies
 
 ### Infrastructure Security
+
 - Secure hosting environment
 - Regular security patches
 - Firewall configuration

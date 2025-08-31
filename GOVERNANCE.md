@@ -17,6 +17,7 @@ The RentZambia project is maintained by a team of core maintainers who are respo
 - Managing community interactions
 
 Current maintainers:
+
 - George Jackson (Project Lead)
 - [Additional Maintainer Name]
 - [Additional Maintainer Name]
@@ -42,6 +43,7 @@ To become a maintainer, individuals should:
 5. Be approved by the maintainer team
 
 Maintainers are expected to:
+
 - Participate in regular maintainer meetings
 - Review pull requests in a timely manner
 - Maintain high standards for code quality
@@ -61,6 +63,7 @@ The RentZambia project uses a consensus-based decision-making process:
 ### Types of Decisions
 
 #### Technical Decisions
+
 - Architecture changes
 - Technology stack updates
 - API design decisions
@@ -68,6 +71,7 @@ The RentZambia project uses a consensus-based decision-making process:
 - Security enhancements
 
 #### Process Decisions
+
 - Development workflows
 - Release processes
 - Testing strategies
@@ -75,6 +79,7 @@ The RentZambia project uses a consensus-based decision-making process:
 - Code review guidelines
 
 #### Community Decisions
+
 - Code of conduct enforcement
 - Community guidelines
 - Event organization
@@ -105,6 +110,7 @@ If consensus cannot be reached:
 ### Code Review Guidelines
 
 #### Review Criteria
+
 - Code quality and readability
 - Adherence to style guides
 - Test coverage and quality
@@ -113,6 +119,7 @@ If consensus cannot be reached:
 - Security implications
 
 #### Review Process
+
 1. **Initial Review** - Quick assessment of changes
 2. **Detailed Review** - Thorough code review
 3. **Feedback** - Provide constructive feedback
@@ -122,12 +129,14 @@ If consensus cannot be reached:
 ### Issue Management
 
 #### Issue Triage Process
+
 1. **Categorization** - Assign appropriate labels and categories
 2. **Prioritization** - Determine priority level (P0-P3)
 3. **Assignment** - Assign to appropriate team member
 4. **Tracking** - Monitor progress and update status
 
 #### Priority Levels
+
 - **P0 (Critical)** - Security issues, major bugs affecting all users
 - **P1 (High)** - Important bugs, critical feature requests
 - **P2 (Medium)** - Regular bugs, important feature requests
@@ -138,6 +147,7 @@ If consensus cannot be reached:
 ### Versioning Strategy
 
 RentZambia follows Semantic Versioning (SemVer):
+
 - **MAJOR** version for incompatible API changes
 - **MINOR** version for backward-compatible functionality
 - **PATCH** version for backward-compatible bug fixes
@@ -145,16 +155,19 @@ RentZambia follows Semantic Versioning (SemVer):
 ### Release Cycle
 
 #### Major Releases (1.0.0, 2.0.0)
+
 - Significant new features
 - Breaking changes
 - Released quarterly (approximately)
 
 #### Minor Releases (1.1.0, 1.2.0)
+
 - New features
 - Improvements
 - Released monthly
 
 #### Patch Releases (1.0.1, 1.0.2)
+
 - Bug fixes
 - Security patches
 - Released as needed
@@ -179,15 +192,18 @@ All community members must adhere to the [Code of Conduct](CODE_OF_CONDUCT.md). 
 ### Communication Channels
 
 #### GitHub
+
 - **Issues** - For bug reports and feature requests
 - **Discussions** - For general discussions and questions
 - **Pull Requests** - For code contributions
 
 #### Real-time Communication
+
 - **Slack** - For real-time discussions (if applicable)
 - **Discord** - Community chat (if applicable)
 
 #### Social Media
+
 - **Twitter** - For announcements and updates
 - **LinkedIn** - For professional networking
 - **Facebook** - For community engagement
@@ -195,18 +211,21 @@ All community members must adhere to the [Code of Conduct](CODE_OF_CONDUCT.md). 
 ### Community Roles
 
 #### Contributors
+
 - Submit code, documentation, or tests
 - Participate in discussions
 - Report issues and bugs
 - Help other community members
 
 #### Core Contributors
+
 - Regular contributors with significant impact
 - Mentor new contributors
 - Participate in project planning
 - Review pull requests
 
 #### Maintainers
+
 - Oversee project development
 - Make key decisions
 - Manage releases
@@ -242,6 +261,7 @@ All project decisions and discussions should happen in public channels when poss
 ### Meeting Notes
 
 If meetings are held, notes should be:
+
 - Published publicly
 - Include decisions made
 - Document action items
@@ -250,6 +270,7 @@ If meetings are held, notes should be:
 ### Financial Transparency
 
 For projects with funding:
+
 - Publish financial reports
 - Document funding sources
 - Explain how funds are used
@@ -278,6 +299,7 @@ Project trademarks are managed according to the trademark policy.
 ### Governance Changes
 
 Changes to this governance document require:
+
 1. **Proposal** - Written proposal explaining changes
 2. **Discussion** - Community discussion period
 3. **Consensus** - General agreement on changes
@@ -286,6 +308,7 @@ Changes to this governance document require:
 ### Review Process
 
 This governance document should be reviewed:
+
 - Annually by the maintainer team
 - When significant project changes occur
 - When community feedback indicates issues
@@ -297,5 +320,6 @@ This governance model is inspired by successful open source projects and adapted
 ## Contact
 
 For questions about governance, contact:
+
 - **Project Lead**: George Jackson
 - **Email**: governance@rentzambia.com

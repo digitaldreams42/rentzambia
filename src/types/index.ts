@@ -3,8 +3,8 @@ export interface User {
   name: string;
   email: string;
   phone?: string;
-  role: "tenant" | "landlord" | "agent" | "admin";
-  status: "active" | "pending" | "suspended";
+  role: 'tenant' | 'landlord' | 'agent' | 'admin';
+  status: 'active' | 'pending' | 'suspended';
   properties: number;
   joinDate: string;
 }
@@ -50,7 +50,7 @@ export interface Inquiry {
   userPhone: string;
   message: string;
   date: string;
-  status: "pending" | "responded" | "closed";
+  status: 'pending' | 'responded' | 'closed';
 }
 
 export interface Booking {
@@ -59,7 +59,7 @@ export interface Booking {
   tenantId: number;
   startDate: string;
   endDate: string;
-  status: "pending" | "confirmed" | "cancelled";
+  status: 'pending' | 'confirmed' | 'cancelled';
   totalPrice: number;
 }
 
@@ -69,5 +69,5 @@ export interface Notification {
   message: string;
   date: string;
   read: boolean;
-  type: "info" | "success" | "warning" | "error";
+  type: 'info' | 'success' | 'warning' | 'error';
 }

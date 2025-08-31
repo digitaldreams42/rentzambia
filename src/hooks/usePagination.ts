@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 interface UsePaginationOptions {
   itemsPerPage?: number;
@@ -44,6 +44,6 @@ export function usePagination<T>(
     nextPage,
     prevPage,
     hasNextPage,
-    hasPrevPage
+    hasPrevPage,
   };
 }

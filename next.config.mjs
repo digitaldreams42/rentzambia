@@ -6,7 +6,7 @@ const nextConfig = {
       'images.pexels.com',
       'images.unsplash.com',
       'cloudinary.com',
-      'res.cloudinary.com'
+      'res.cloudinary.com',
     ],
   },
   serverExternalPackages: ['mongoose'],
@@ -16,7 +16,7 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-    
+
     // Fix for Webpack 5 issue with polyfills
     if (!isServer) {
       config.resolve.fallback = {
@@ -26,7 +26,7 @@ const nextConfig = {
         tls: false,
       };
     }
-    
+
     return config;
   },
   env: {

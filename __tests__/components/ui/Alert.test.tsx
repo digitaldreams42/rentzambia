@@ -7,24 +7,30 @@ describe('Alert', () => {
     render(
       <Alert>
         <AlertTitle>Success</AlertTitle>
-        <AlertDescription>Your action was completed successfully.</AlertDescription>
+        <AlertDescription>
+          Your action was completed successfully.
+        </AlertDescription>
       </Alert>
     );
-    
+
     expect(screen.getByText('Success')).toBeInTheDocument();
-    expect(screen.getByText('Your action was completed successfully.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Your action was completed successfully.')
+    ).toBeInTheDocument();
   });
 
   it('applies correct variant classes', () => {
     render(
       <Alert variant="destructive">
         <AlertTitle>Error</AlertTitle>
-        <AlertDescription>There was an error processing your request.</AlertDescription>
+        <AlertDescription>
+          There was an error processing your request.
+        </AlertDescription>
       </Alert>
     );
-    
+
     const alert = screen.getByRole('alert');
-    expect(alert).toHaveClass('border-destructive');
+    expect(alert).toHaveClass('border-destructive/50');
   });
 
   it('renders default variant when no variant is specified', () => {
@@ -34,7 +40,7 @@ describe('Alert', () => {
         <AlertDescription>This is an informational message.</AlertDescription>
       </Alert>
     );
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveClass('bg-background');
   });
@@ -46,7 +52,7 @@ describe('Alert', () => {
         <AlertDescription>This alert has a custom class.</AlertDescription>
       </Alert>
     );
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveClass('custom-class');
   });

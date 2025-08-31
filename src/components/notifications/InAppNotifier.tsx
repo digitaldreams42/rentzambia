@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
 interface Notification {
   id: number;
@@ -16,7 +16,7 @@ interface Notification {
   message: string;
   date: string;
   read: boolean;
-  type: "info" | "success" | "warning" | "error";
+  type: 'info' | 'success' | 'warning' | 'error';
 }
 
 interface InAppNotifierProps {
@@ -25,17 +25,21 @@ interface InAppNotifierProps {
   onMarkAllAsRead: () => void;
 }
 
-export function InAppNotifier({ notifications, onMarkAsRead, onMarkAllAsRead }: InAppNotifierProps) {
+export function InAppNotifier({
+  notifications,
+  onMarkAsRead,
+  onMarkAllAsRead,
+}: InAppNotifierProps) {
   const [isOpen, setIsOpen] = useState(false);
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  const getIcon = (type: Notification["type"]) => {
+  const getIcon = (type: Notification['type']) => {
     switch (type) {
-      case "success":
+      case 'success':
         return <Icons.checkCircle className="w-4 h-4 text-success" />;
-      case "warning":
+      case 'warning':
         return <Icons.alertTriangle className="w-4 h-4 text-warning" />;
-      case "error":
+      case 'error':
         return <Icons.alertCircle className="w-4 h-4 text-destructive" />;
       default:
         return <Icons.info className="w-4 h-4 text-info" />;
@@ -57,9 +61,9 @@ export function InAppNotifier({ notifications, onMarkAsRead, onMarkAllAsRead }: 
           <div className="flex justify-between items-center">
             <h3 className="font-medium">Notifications</h3>
             {unreadCount > 0 && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={onMarkAllAsRead}
                 className="text-xs"
               >
@@ -68,20 +72,24 @@ export function InAppNotifier({ notifications, onMarkAsRead, onMarkAllAsRead }: 
             )}
           </div>
         </div>
-        
+
         <div className="max-h-96 overflow-y-auto">
           {notifications.length > 0 ? (
-            notifications.map((notification) => (
-              <DropdownMenuItem 
+            notifications.map(notification => (
+              <DropdownMenuItem
                 key={notification.id}
                 className="flex items-start p-3 cursor-pointer"
                 onClick={() => onMarkAsRead(notification.id)}
               >
-                <div className={`mr-3 mt-1 ${!notification.read ? "bg-primary/10 p-2 rounded-full" : ""}`}>
+                <div
+                  className={`mr-3 mt-1 ${!notification.read ? 'bg-primary/10 p-2 rounded-full' : ''}`}
+                >
                   {getIcon(notification.type)}
                 </div>
                 <div className="flex-1">
-                  <p className={`font-medium text-sm ${!notification.read ? "text-foreground" : "text-muted-foreground"}`}>
+                  <p
+                    className={`font-medium text-sm ${!notification.read ? 'text-foreground' : 'text-muted-foreground'}`}
+                  >
                     {notification.title}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -99,7 +107,7 @@ export function InAppNotifier({ notifications, onMarkAsRead, onMarkAllAsRead }: 
             </div>
           )}
         </div>
-        
+
         <div className="p-2 border-t text-center">
           <Button variant="ghost" size="sm">
             View all notifications

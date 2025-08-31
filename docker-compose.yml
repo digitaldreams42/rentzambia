@@ -4,7 +4,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
     env_file:
@@ -39,7 +39,6 @@ services:
 networks:
   rentzambia-network:
     driver: bridge
-
 # Uncomment and configure if using volumes for database
 # volumes:
 #   mongodb_data:

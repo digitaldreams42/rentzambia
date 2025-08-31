@@ -14,8 +14,8 @@ describe('Tenant Property Search', () => {
   it('should allow searching properties', () => {
     cy.getByTestId('search-input').type('Kabulonga');
     cy.getByTestId('search-button').click();
-    
-    cy.getByTestId('property-card').each(($el) => {
+
+    cy.getByTestId('property-card').each($el => {
       cy.wrap($el).should('contain.text', 'Kabulonga');
     });
   });
@@ -24,8 +24,8 @@ describe('Tenant Property Search', () => {
     cy.getByTestId('filter-button').click();
     cy.getByTestId('bedrooms-filter').select('2');
     cy.getByTestId('apply-filters-button').click();
-    
-    cy.getByTestId('property-card').each(($el) => {
+
+    cy.getByTestId('property-card').each($el => {
       cy.wrap($el).should('contain.text', '2 bed');
     });
   });

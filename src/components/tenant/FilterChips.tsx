@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 interface FilterChipProps {
   label: string;
@@ -11,7 +11,7 @@ interface FilterChipProps {
 export function FilterChip({ label, active, onClick }: FilterChipProps) {
   return (
     <Button
-      variant={active ? "default" : "outline"}
+      variant={active ? 'default' : 'outline'}
       size="sm"
       className="rounded-full px-3 py-1 h-auto"
       onClick={onClick}

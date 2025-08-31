@@ -1,10 +1,15 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 interface TwoFactorModalProps {
   isOpen: boolean;
@@ -14,7 +19,13 @@ interface TwoFactorModalProps {
   method?: 'sms' | 'authenticator';
 }
 
-export function TwoFactorModal({ isOpen, onClose, onVerify, loading, method = 'sms' }: TwoFactorModalProps) {
+export function TwoFactorModal({
+  isOpen,
+  onClose,
+  onVerify,
+  loading,
+  method = 'sms',
+}: TwoFactorModalProps) {
   const [code, setCode] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,9 +41,9 @@ export function TwoFactorModal({ isOpen, onClose, onVerify, loading, method = 's
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <p className="text-muted-foreground">
-            {method === 'sms' 
-              ? "Enter the 6-digit code we sent to your phone number." 
-              : "Enter the 6-digit code from your authenticator app."}
+            {method === 'sms'
+              ? 'Enter the 6-digit code we sent to your phone number.'
+              : 'Enter the 6-digit code from your authenticator app.'}
           </p>
           <div className="space-y-2">
             <Label htmlFor="code">Authentication Code</Label>
@@ -42,7 +53,7 @@ export function TwoFactorModal({ isOpen, onClose, onVerify, loading, method = 's
               maxLength={6}
               className="text-center text-2xl tracking-widest"
               value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+              onChange={e => setCode(e.target.value.replace(/\D/g, ''))}
               placeholder="000000"
             />
           </div>
@@ -51,7 +62,7 @@ export function TwoFactorModal({ isOpen, onClose, onVerify, loading, method = 's
               Cancel
             </Button>
             <Button type="submit" disabled={code.length !== 6 || loading}>
-              {loading ? "Verifying..." : "Verify"}
+              {loading ? 'Verifying...' : 'Verify'}
             </Button>
           </div>
         </form>

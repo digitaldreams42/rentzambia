@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { AuthForm } from "@/components/auth/AuthForm";
-import { OTPModal } from "@/components/auth/OTPModal";
-import { AuthService } from "@/services/authService";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { AuthForm } from '@/components/auth/AuthForm';
+import { OTPModal } from '@/components/auth/OTPModal';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { AuthService } from '@/services/authService';
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,62 +19,62 @@ export default function RegisterPage() {
   const handleSubmit = async (data: any) => {
     setIsLoading(true);
     setAuthError(null);
-    
+
     try {
       // Validate passwords match
-      if (data.type === "register" && data.password !== data.confirmPassword) {
-        setAuthError("Passwords do not match");
+      if (data.type === 'register' && data.password !== data.confirmPassword) {
+        setAuthError('Passwords do not match');
         setIsLoading(false);
         return;
       }
-      
+
       const response = await AuthService.register(
-        data.email, 
-        data.password, 
-        data.fullName, 
+        data.email,
+        data.password,
+        data.fullName,
         data.role
       );
-      
+
       if (response.success) {
         // For landlords and agents, require phone verification
-        if (data.role === "landlord" || data.role === "agent") {
+        if (data.role === 'landlord' || data.role === 'agent') {
           setShowOTPModal(true);
         } else {
           // Redirect to dashboard
           router.push(`/${data.role}`);
         }
       } else {
-        setAuthError(response.error || "Failed to create account");
+        setAuthError(response.error || 'Failed to create account');
       }
     } catch (error: any) {
-      setAuthError(error.message || "An unexpected error occurred");
+      setAuthError(error.message || 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleOTPVerify = async (otp: string) => {
+  const handleOTPVerify = async () => {
     // Simulate OTP verification
     setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setShowOTPModal(false);
     setIsLoading(false);
     // Redirect to dashboard
-    router.push("/landlord");
+    router.push('/landlord');
   };
 
   const handleGoogleRegister = async () => {
     setIsLoading(true);
     try {
       const response = await AuthService.signInWithGoogle();
-      
+
       if (response.success) {
-        router.push("/tenant");
+        router.push('/tenant');
       } else {
-        setAuthError(response.error || "Failed to register with Google");
+        setAuthError(response.error || 'Failed to register with Google');
       }
     } catch (error: any) {
-      setAuthError(error.message || "An unexpected error occurred");
+      setAuthError(error.message || 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -94,11 +95,11 @@ export default function RegisterPage() {
                 {authError}
               </div>
             )}
-            
-            <AuthForm 
-              type="register" 
-              onSubmit={handleSubmit} 
-              isLoading={isLoading} 
+
+            <AuthForm
+              type="register"
+              onSubmit={handleSubmit}
+              isLoading={isLoading}
             />
 
             <div className="relative">

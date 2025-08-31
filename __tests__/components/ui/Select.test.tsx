@@ -1,53 +1,66 @@
 // __tests__/components/ui/Select.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Select } from '@/components/ui/select';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import React from 'react';
 
 describe('Select', () => {
-  const options = [
-    { value: 'tenant', label: 'Tenant' },
-    { value: 'landlord', label: 'Landlord' },
-    { value: 'agent', label: 'Agent' }
-  ];
-
   it('renders select with correct options', () => {
-    render(<Select options={options} placeholder="Select a role" />);
-    
-    const select = screen.getByRole('combobox');
-    expect(select).toBeInTheDocument();
-    
-    options.forEach(option => {
-      expect(screen.getByText(option.label)).toBeInTheDocument();
-    });
+    render(
+      <Select>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="tenant">Tenant</SelectItem>
+          <SelectItem value="landlord">Landlord</SelectItem>
+          <SelectItem value="agent">Agent</SelectItem>
+        </SelectContent>
+      </Select>
+    );
+
+    const trigger = screen.getByText('Select a role');
+    expect(trigger).toBeInTheDocument();
   });
 
-  it('handles onChange events', () => {
+  it('handles value changes', () => {
     const handleChange = jest.fn();
-    render(<Select options={options} onChange={handleChange} />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: 'landlord' } });
-    
+    render(
+      <Select onValueChange={handleChange}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="tenant">Tenant</SelectItem>
+          <SelectItem value="landlord">Landlord</SelectItem>
+          <SelectItem value="agent">Agent</SelectItem>
+        </SelectContent>
+      </Select>
+    );
+
+    // Open the select
+    const trigger = screen.getByText('Select a role');
+    fireEvent.click(trigger);
+
+    // Click an option
+    const option = screen.getByText('Landlord');
+    fireEvent.click(option);
+
     expect(handleChange).toHaveBeenCalledWith('landlord');
   });
 
-  it('renders with default value', () => {
-    render(<Select options={options} defaultValue="tenant" />);
-    
-    const select = screen.getByRole('combobox');
-    expect(select).toHaveValue('tenant');
-  });
-
-  it('applies error styles when hasError prop is true', () => {
-    render(<Select options={options} hasError={true} />);
-    
-    const select = screen.getByRole('combobox');
-    expect(select).toHaveClass('border-destructive');
-  });
-
   it('renders with custom className', () => {
-    render(<Select options={options} className="custom-class" />);
-    
-    const select = screen.getByRole('combobox');
-    expect(select).toHaveClass('custom-class');
+    render(
+      <Select>
+        <SelectTrigger className="custom-class">
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="tenant">Tenant</SelectItem>
+        </SelectContent>
+      </Select>
+    );
+
+    const trigger = screen.getByText('Select a role');
+    expect(trigger.parentElement).toHaveClass('custom-class');
   });
 });

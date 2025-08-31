@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { RoleSelector } from "@/components/auth/RoleSelector";
+import * as React from 'react';
+import { Form, FormField, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { RoleSelector } from '@/components/auth/RoleSelector';
 
 export interface AuthFormProps {
-  type: "login" | "register";
+  type: 'login' | 'register';
   onSubmit: (data: any) => void;
   isLoading?: boolean;
 }
@@ -15,12 +15,12 @@ export interface AuthFormProps {
 const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
   ({ type, onSubmit, isLoading }, ref) => {
     const [formData, setFormData] = React.useState({
-      email: "",
-      password: "",
-      fullName: "",
-      phone: "",
-      confirmPassword: "",
-      role: "tenant",
+      email: '',
+      password: '',
+      fullName: '',
+      phone: '',
+      confirmPassword: '',
+      role: 'tenant',
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -38,11 +38,11 @@ const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
           <FormLabel htmlFor="role">I am a:</FormLabel>
           <RoleSelector
             value={formData.role}
-            onValueChange={(value) => handleChange("role", value)}
+            onValueChange={value => handleChange('role', value)}
           />
         </FormField>
 
-        {type === "register" && (
+        {type === 'register' && (
           <>
             <FormField>
               <FormLabel htmlFor="fullName">Full Name</FormLabel>
@@ -50,7 +50,7 @@ const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
                 id="fullName"
                 type="text"
                 value={formData.fullName}
-                onChange={(e) => handleChange("fullName", e.target.value)}
+                onChange={e => handleChange('fullName', e.target.value)}
                 placeholder="John Doe"
                 required
               />
@@ -62,7 +62,7 @@ const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
                 id="phone"
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
+                onChange={e => handleChange('phone', e.target.value)}
                 placeholder="+260 XXX XXX XXX"
                 required
               />
@@ -76,7 +76,7 @@ const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
             id="email"
             type="email"
             value={formData.email}
-            onChange={(e) => handleChange("email", e.target.value)}
+            onChange={e => handleChange('email', e.target.value)}
             placeholder="your@email.com"
             required
           />
@@ -88,47 +88,43 @@ const AuthForm = React.forwardRef<HTMLFormElement, AuthFormProps>(
             id="password"
             type="password"
             value={formData.password}
-            onChange={(e) => handleChange("password", e.target.value)}
+            onChange={e => handleChange('password', e.target.value)}
             placeholder="••••••••"
             required
           />
         </FormField>
 
-        {type === "register" && (
+        {type === 'register' && (
           <FormField>
             <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
             <Input
               id="confirmPassword"
               type="password"
               value={formData.confirmPassword}
-              onChange={(e) => handleChange("confirmPassword", e.target.value)}
+              onChange={e => handleChange('confirmPassword', e.target.value)}
               placeholder="••••••••"
               required
             />
           </FormField>
         )}
 
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className="w-full"
-        >
+        <Button type="submit" disabled={isLoading} className="w-full">
           {isLoading ? (
             <span className="flex items-center">
               <span className="ml-2">
-                {type === "login" ? "Signing in..." : "Creating account..."}
+                {type === 'login' ? 'Signing in...' : 'Creating account...'}
               </span>
             </span>
-          ) : type === "login" ? (
-            "Sign In"
+          ) : type === 'login' ? (
+            'Sign In'
           ) : (
-            "Create Account"
+            'Create Account'
           )}
         </Button>
       </Form>
     );
   }
 );
-AuthForm.displayName = "AuthForm";
+AuthForm.displayName = 'AuthForm';
 
 export { AuthForm };

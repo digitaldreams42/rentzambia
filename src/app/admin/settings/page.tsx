@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
+import { useState } from 'react';
+import { Form, FormField, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface Settings {
   siteName: string;
@@ -29,17 +29,18 @@ interface Settings {
 
 // Mock settings data
 const mockSettings: Settings = {
-  siteName: "RentZambia",
-  siteDescription: "RentZambia connects tenants with landlords and agents to make property rental simple, fast, and secure in Zambia.",
-  contactEmail: "support@rentzambia.com",
-  contactPhone: "+260 97 123 4567",
-  currency: "K",
-  timezone: "Africa/Lusaka",
+  siteName: 'RentZambia',
+  siteDescription:
+    'RentZambia connects tenants with landlords and agents to make property rental simple, fast, and secure in Zambia.',
+  contactEmail: 'support@rentzambia.com',
+  contactPhone: '+260 97 123 4567',
+  currency: 'K',
+  timezone: 'Africa/Lusaka',
   maintenanceMode: false,
   allowRegistration: true,
   requireEmailVerification: true,
   maxPropertiesPerLandlord: 10,
-  commissionRate: 5
+  commissionRate: 5,
 };
 
 export default function AdminSettingsPage() {
@@ -49,10 +50,13 @@ export default function AdminSettingsPage() {
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     setSettings(formData);
-    alert("Settings saved successfully!");
+    alert('Settings saved successfully!');
   };
 
-  const handleChange = <K extends keyof Settings>(field: K, value: Settings[K]) => {
+  const handleChange = <K extends keyof Settings>(
+    field: K,
+    value: Settings[K]
+  ) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -67,9 +71,11 @@ export default function AdminSettingsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-foreground">Site Settings</h1>
+              <h1 className="text-xl font-bold text-foreground">
+                Site Settings
+              </h1>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <button className="text-foreground hover:text-primary">
                 Notifications
@@ -100,7 +106,7 @@ export default function AdminSettingsPage() {
                     id="siteName"
                     type="text"
                     value={formData.siteName}
-                    onChange={(e) => handleChange("siteName", e.target.value)}
+                    onChange={e => handleChange('siteName', e.target.value)}
                     required
                   />
                 </FormField>
@@ -111,7 +117,7 @@ export default function AdminSettingsPage() {
                     id="contactEmail"
                     type="email"
                     value={formData.contactEmail}
-                    onChange={(e) => handleChange("contactEmail", e.target.value)}
+                    onChange={e => handleChange('contactEmail', e.target.value)}
                     required
                   />
                 </FormField>
@@ -122,7 +128,7 @@ export default function AdminSettingsPage() {
                     id="contactPhone"
                     type="tel"
                     value={formData.contactPhone}
-                    onChange={(e) => handleChange("contactPhone", e.target.value)}
+                    onChange={e => handleChange('contactPhone', e.target.value)}
                     required
                   />
                 </FormField>
@@ -133,30 +139,36 @@ export default function AdminSettingsPage() {
                     id="currency"
                     type="text"
                     value={formData.currency}
-                    onChange={(e) => handleChange("currency", e.target.value)}
+                    onChange={e => handleChange('currency', e.target.value)}
                     required
                   />
                 </FormField>
 
                 <FormField>
                   <FormLabel htmlFor="timezone">Timezone</FormLabel>
-                  <Select 
-                    value={formData.timezone} 
-                    onValueChange={(value) => handleChange("timezone", value)}
+                  <Select
+                    value={formData.timezone}
+                    onValueChange={value => handleChange('timezone', value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select timezone" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Africa/Lusaka">Africa/Lusaka</SelectItem>
-                      <SelectItem value="Africa/Harare">Africa/Harare</SelectItem>
+                      <SelectItem value="Africa/Lusaka">
+                        Africa/Lusaka
+                      </SelectItem>
+                      <SelectItem value="Africa/Harare">
+                        Africa/Harare
+                      </SelectItem>
                       <SelectItem value="UTC">UTC</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormField>
 
                 <FormField>
-                  <FormLabel htmlFor="commissionRate">Commission Rate (%)</FormLabel>
+                  <FormLabel htmlFor="commissionRate">
+                    Commission Rate (%)
+                  </FormLabel>
                   <Input
                     id="commissionRate"
                     type="number"
@@ -164,30 +176,43 @@ export default function AdminSettingsPage() {
                     max="100"
                     step="0.1"
                     value={formData.commissionRate}
-                    onChange={(e) => handleChange("commissionRate", Number(e.target.value))}
+                    onChange={e =>
+                      handleChange('commissionRate', Number(e.target.value))
+                    }
                     required
                   />
                 </FormField>
 
                 <FormField>
-                  <FormLabel htmlFor="maxPropertiesPerLandlord">Max Properties Per Landlord</FormLabel>
+                  <FormLabel htmlFor="maxPropertiesPerLandlord">
+                    Max Properties Per Landlord
+                  </FormLabel>
                   <Input
                     id="maxPropertiesPerLandlord"
                     type="number"
                     min="1"
                     value={formData.maxPropertiesPerLandlord}
-                    onChange={(e) => handleChange("maxPropertiesPerLandlord", Number(e.target.value))}
+                    onChange={e =>
+                      handleChange(
+                        'maxPropertiesPerLandlord',
+                        Number(e.target.value)
+                      )
+                    }
                     required
                   />
                 </FormField>
               </div>
 
               <FormField>
-                <FormLabel htmlFor="siteDescription">Site Description</FormLabel>
+                <FormLabel htmlFor="siteDescription">
+                  Site Description
+                </FormLabel>
                 <Textarea
                   id="siteDescription"
                   value={formData.siteDescription}
-                  onChange={(e) => handleChange("siteDescription", e.target.value)}
+                  onChange={e =>
+                    handleChange('siteDescription', e.target.value)
+                  }
                   rows={3}
                   required
                 />
@@ -197,62 +222,74 @@ export default function AdminSettingsPage() {
                 <h3 className="text-lg font-semibold text-foreground mb-4">
                   Site Features
                 </h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-foreground">Maintenance Mode</p>
+                      <p className="font-medium text-foreground">
+                        Maintenance Mode
+                      </p>
                       <p className="text-sm text-muted-foreground">
                         Temporarily disable the site for maintenance
                       </p>
                     </div>
                     <Button
-                      variant={formData.maintenanceMode ? "default" : "outline"}
-                      onClick={() => handleToggle("maintenanceMode")}
+                      variant={formData.maintenanceMode ? 'default' : 'outline'}
+                      onClick={() => handleToggle('maintenanceMode')}
                       type="button"
                     >
-                      {formData.maintenanceMode ? "Enabled" : "Disabled"}
+                      {formData.maintenanceMode ? 'Enabled' : 'Disabled'}
                     </Button>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-foreground">Allow Registration</p>
+                      <p className="font-medium text-foreground">
+                        Allow Registration
+                      </p>
                       <p className="text-sm text-muted-foreground">
                         Allow new users to register
                       </p>
                     </div>
                     <Button
-                      variant={formData.allowRegistration ? "default" : "outline"}
-                      onClick={() => handleToggle("allowRegistration")}
+                      variant={
+                        formData.allowRegistration ? 'default' : 'outline'
+                      }
+                      onClick={() => handleToggle('allowRegistration')}
                       type="button"
                     >
-                      {formData.allowRegistration ? "Enabled" : "Disabled"}
+                      {formData.allowRegistration ? 'Enabled' : 'Disabled'}
                     </Button>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-foreground">Require Email Verification</p>
+                      <p className="font-medium text-foreground">
+                        Require Email Verification
+                      </p>
                       <p className="text-sm text-muted-foreground">
                         Require users to verify their email address
                       </p>
                     </div>
                     <Button
-                      variant={formData.requireEmailVerification ? "default" : "outline"}
-                      onClick={() => handleToggle("requireEmailVerification")}
+                      variant={
+                        formData.requireEmailVerification
+                          ? 'default'
+                          : 'outline'
+                      }
+                      onClick={() => handleToggle('requireEmailVerification')}
                       type="button"
                     >
-                      {formData.requireEmailVerification ? "Enabled" : "Disabled"}
+                      {formData.requireEmailVerification
+                        ? 'Enabled'
+                        : 'Disabled'}
                     </Button>
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-end">
-                <Button type="submit">
-                  Save Settings
-                </Button>
+                <Button type="submit">Save Settings</Button>
               </div>
             </Form>
           </div>

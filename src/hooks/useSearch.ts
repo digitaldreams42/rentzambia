@@ -1,5 +1,5 @@
-import * as React from "react";
-import { debounce } from "@/lib/utils";
+import * as React from 'react';
+import { debounce } from '@/lib/utils';
 
 interface UseSearchOptions {
   debounceMs?: number;
@@ -11,28 +11,29 @@ export function useSearch<T>(
   options: UseSearchOptions = {}
 ) {
   const { debounceMs = 300 } = options;
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState('');
   const [filteredItems, setFilteredItems] = React.useState<T[]>(items);
 
   const debouncedSearch = React.useMemo(
-    () => debounce((searchQuery: string) => {
-      if (!searchQuery) {
-        setFilteredItems(items);
-        return;
-      }
+    () =>
+      debounce((searchQuery: string) => {
+        if (!searchQuery) {
+          setFilteredItems(items);
+          return;
+        }
 
-      const filtered = items.filter(item => {
-        return searchFields.some(field => {
-          const value = item[field];
-          if (typeof value === "string") {
-            return value.toLowerCase().includes(searchQuery.toLowerCase());
-          }
-          return false;
+        const filtered = items.filter(item => {
+          return searchFields.some(field => {
+            const value = item[field];
+            if (typeof value === 'string') {
+              return value.toLowerCase().includes(searchQuery.toLowerCase());
+            }
+            return false;
+          });
         });
-      });
 
-      setFilteredItems(filtered);
-    }, debounceMs),
+        setFilteredItems(filtered);
+      }, debounceMs),
     [items, searchFields, debounceMs]
   );
 
@@ -47,6 +48,6 @@ export function useSearch<T>(
   return {
     query,
     setQuery,
-    filteredItems
+    filteredItems,
   };
 }

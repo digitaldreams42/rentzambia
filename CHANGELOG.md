@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial project structure
 - Next.js 15 setup with TypeScript
 - Tailwind CSS configuration
@@ -22,12 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive documentation
 
 ### Changed
+
 - Updated dependencies to latest versions
 - Improved performance with code splitting
 - Enhanced accessibility compliance
 - Optimized images and assets
 
 ### Fixed
+
 - Various bug fixes and improvements
 - Security vulnerabilities
 - Performance bottlenecks
@@ -35,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-02-28
 
 ### Added
+
 - Initial release of RentZambia platform
 - Multi-role user system (tenant, landlord, agent, admin)
 - Property listing and management
@@ -48,18 +52,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full documentation
 
 ### Changed
+
 - N/A (Initial release)
 
 ### Deprecated
+
 - N/A (Initial release)
 
 ### Removed
+
 - N/A (Initial release)
 
 ### Fixed
+
 - N/A (Initial release)
 
 ### Security
+
 - Implemented JWT-based authentication
 - Added input validation and sanitization
 - Secured API endpoints with proper authorization
@@ -69,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-01-15
 
 ### Added
+
 - Project initialization
 - Basic Next.js setup
 - Initial component library

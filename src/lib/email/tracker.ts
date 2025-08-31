@@ -5,7 +5,7 @@ interface EmailTrackingData {
   recipient: string;
   subject: string;
   sentAt: Date;
-  status: "sent" | "delivered" | "opened" | "bounced";
+  status: 'sent' | 'delivered' | 'opened' | 'bounced';
   openedAt?: Date;
   bouncedAt?: Date;
   bounceReason?: string;
@@ -14,31 +14,27 @@ interface EmailTrackingData {
 export class EmailTracker {
   private static trackingData: EmailTrackingData[] = [];
 
-  static trackEmailSent(
-    id: string,
-    recipient: string,
-    subject: string
-  ): void {
+  static trackEmailSent(id: string, recipient: string, subject: string): void {
     this.trackingData.push({
       id,
       recipient,
       subject,
       sentAt: new Date(),
-      status: "sent"
+      status: 'sent',
     });
   }
 
   static trackEmailDelivered(id: string): void {
     const email = this.trackingData.find(e => e.id === id);
     if (email) {
-      email.status = "delivered";
+      email.status = 'delivered';
     }
   }
 
   static trackEmailOpened(id: string): void {
     const email = this.trackingData.find(e => e.id === id);
     if (email) {
-      email.status = "opened";
+      email.status = 'opened';
       email.openedAt = new Date();
     }
   }
@@ -46,7 +42,7 @@ export class EmailTracker {
   static trackEmailBounced(id: string, reason: string): void {
     const email = this.trackingData.find(e => e.id === id);
     if (email) {
-      email.status = "bounced";
+      email.status = 'bounced';
       email.bouncedAt = new Date();
       email.bounceReason = reason;
     }
@@ -70,14 +66,14 @@ export class EmailTracker {
       sent: 0,
       delivered: 0,
       opened: 0,
-      bounced: 0
+      bounced: 0,
     };
 
     this.trackingData.forEach(email => {
       stats.sent++;
-      if (email.status === "delivered") stats.delivered++;
-      if (email.status === "opened") stats.opened++;
-      if (email.status === "bounced") stats.bounced++;
+      if (email.status === 'delivered') stats.delivered++;
+      if (email.status === 'opened') stats.opened++;
+      if (email.status === 'bounced') stats.bounced++;
     });
 
     return stats;

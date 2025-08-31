@@ -1,84 +1,90 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { PropertyStatusBadge } from "@/components/property/PropertyStatusBadge";
-import { Input } from "@/components/ui/input";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
-import { PROPERTY_TYPES } from "@/data/constants";
+import { useState } from 'react';
+
+import { PropertyStatusBadge } from '@/components/property/PropertyStatusBadge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { PROPERTY_TYPES } from '@/data/constants';
 
 // Mock property data
 const mockProperties = [
   {
     id: 1,
-    title: "Modern 2-Bedroom Apartment in Kabulonga",
-    location: "Kabulonga, Lusaka",
+    title: 'Modern 2-Bedroom Apartment in Kabulonga',
+    location: 'Kabulonga, Lusaka',
     price: 3500,
-    type: "Apartment",
-    status: "published",
+    type: 'Apartment',
+    status: 'published',
     views: 124,
     landlord: {
-      name: "Sarah Banda"
-    }
+      name: 'Sarah Banda',
+    },
   },
   {
     id: 2,
-    title: "Spacious 3-Bedroom House in Roma",
-    location: "Roma, Lusaka",
+    title: 'Spacious 3-Bedroom House in Roma',
+    location: 'Roma, Lusaka',
     price: 4200,
-    type: "House",
-    status: "pending",
+    type: 'House',
+    status: 'pending',
     views: 0,
     landlord: {
-      name: "Sarah Banda"
-    }
+      name: 'Sarah Banda',
+    },
   },
   {
     id: 3,
-    title: "Luxury Studio in City Center",
-    location: "City Center, Lusaka",
+    title: 'Luxury Studio in City Center',
+    location: 'City Center, Lusaka',
     price: 2800,
-    type: "Studio",
-    status: "published",
+    type: 'Studio',
+    status: 'published',
     views: 87,
     landlord: {
-      name: "Sarah Banda"
-    }
-  }
+      name: 'Sarah Banda',
+    },
+  },
 ];
 
 export default function AdminPropertiesPage() {
   const [properties, setProperties] = useState(mockProperties);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
 
   const handleApproveProperty = (id: number) => {
-    setProperties(prev => prev.map(property => 
-      property.id === id ? { ...property, status: "published" } : property
-    ));
+    setProperties(prev =>
+      prev.map(property =>
+        property.id === id ? { ...property, status: 'published' } : property
+      )
+    );
   };
 
   const handleRejectProperty = (id: number) => {
-    setProperties(prev => prev.map(property => 
-      property.id === id ? { ...property, status: "rejected" } : property
-    ));
+    setProperties(prev =>
+      prev.map(property =>
+        property.id === id ? { ...property, status: 'rejected' } : property
+      )
+    );
   };
 
   // Filter properties based on search and filters
   const filteredProperties = properties.filter(property => {
-    const matchesSearch = property.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          property.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          property.landlord.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      property.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      property.landlord.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = !statusFilter || property.status === statusFilter;
     const matchesType = !typeFilter || property.type === typeFilter;
-    
+
     return matchesSearch && matchesStatus && matchesType;
   });
 
@@ -89,9 +95,11 @@ export default function AdminPropertiesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-foreground">Property Management</h1>
+              <h1 className="text-xl font-bold text-foreground">
+                Property Management
+              </h1>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <button className="text-foreground hover:text-primary">
                 Notifications
@@ -115,11 +123,11 @@ export default function AdminPropertiesPage() {
                 type="text"
                 placeholder="Search properties by title, location, or landlord..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full"
               />
             </div>
-            
+
             <div>
               <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-full">
@@ -134,7 +142,7 @@ export default function AdminPropertiesPage() {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div>
               <Select value={typeFilter} onValueChange={setTypeFilter}>
                 <SelectTrigger className="w-full">
@@ -169,31 +177,52 @@ export default function AdminPropertiesPage() {
               <table className="min-w-full divide-y divide-border">
                 <thead className="bg-muted">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Property
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Landlord
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Location
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Price
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Views
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+                    >
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-background divide-y divide-border">
-                  {filteredProperties.map((property) => (
+                  {filteredProperties.map(property => (
                     <tr key={property.id} className="hover:bg-muted/50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-foreground">
@@ -222,17 +251,17 @@ export default function AdminPropertiesPage() {
                         {property.views}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        {property.status === "pending" && (
+                        {property.status === 'pending' && (
                           <div className="flex space-x-2">
-                            <Button 
-                              variant="default" 
+                            <Button
+                              variant="default"
                               size="sm"
                               onClick={() => handleApproveProperty(property.id)}
                             >
                               Approve
                             </Button>
-                            <Button 
-                              variant="destructive" 
+                            <Button
+                              variant="destructive"
                               size="sm"
                               onClick={() => handleRejectProperty(property.id)}
                             >
@@ -249,8 +278,19 @@ export default function AdminPropertiesPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-muted-foreground mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 mx-auto text-muted-foreground mb-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              />
             </svg>
             <h3 className="text-lg font-medium text-foreground mb-2">
               No properties found

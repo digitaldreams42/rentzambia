@@ -26,13 +26,13 @@ Cypress.Commands.add('logout', () => {
 });
 
 // Custom command to get elements by data-testid
-Cypress.Commands.add('getByTestId', (testId) => {
+Cypress.Commands.add('getByTestId', testId => {
   return cy.get(`[data-testid="${testId}"]`);
 });
 
 // Custom command to clear localStorage and sessionStorage
 Cypress.Commands.add('clearStorage', () => {
-  cy.window().then((win) => {
+  cy.window().then(win => {
     win.localStorage.clear();
     win.sessionStorage.clear();
   });
@@ -45,13 +45,13 @@ Cypress.Commands.add('resetDatabase', () => {
 });
 
 // Custom command to seed database
-Cypress.Commands.add('seedDatabase', (seedData) => {
+Cypress.Commands.add('seedDatabase', seedData => {
   // This would typically call an API endpoint to seed the test database
   cy.request('POST', '/api/test/seed-database', seedData);
 });
 
 // Custom command to wait for API calls
-Cypress.Commands.add('waitForApi', (alias) => {
+Cypress.Commands.add('waitForApi', alias => {
   cy.wait(`@${alias}`, { timeout: 10000 });
 });
 

@@ -9,17 +9,19 @@ This document provides detailed information about the reusable components in the
 A versatile button component with multiple variants and sizes.
 
 **Props:**
+
 - `variant`: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
 - `size`: "default" | "sm" | "lg" | "icon"
 - All standard button HTML attributes
 
 **Usage:**
+
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 <Button variant="default" size="lg">
   Click me
-</Button>
+</Button>;
 ```
 
 ### Card
@@ -27,9 +29,11 @@ import { Button } from "@/components/ui/button";
 A flexible card component for displaying content in a container.
 
 **Props:**
+
 - All standard div HTML attributes
 
 **Subcomponents:**
+
 - `CardHeader` - Header section of the card
 - `CardTitle` - Title within the card header
 - `CardDescription` - Description within the card header
@@ -37,17 +41,16 @@ A flexible card component for displaying content in a container.
 - `CardFooter` - Footer section
 
 **Usage:**
+
 ```tsx
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
   </CardHeader>
-  <CardContent>
-    Card content goes here
-  </CardContent>
-</Card>
+  <CardContent>Card content goes here</CardContent>
+</Card>;
 ```
 
 ### Input
@@ -55,13 +58,15 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 A styled input component with consistent styling.
 
 **Props:**
+
 - All standard input HTML attributes
 
 **Usage:**
-```tsx
-import { Input } from "@/components/ui/input";
 
-<Input type="text" placeholder="Enter text" />
+```tsx
+import { Input } from '@/components/ui/input';
+
+<Input type="text" placeholder="Enter text" />;
 ```
 
 ### Textarea
@@ -69,13 +74,15 @@ import { Input } from "@/components/ui/input";
 A styled textarea component.
 
 **Props:**
+
 - All standard textarea HTML attributes
 
 **Usage:**
-```tsx
-import { Textarea } from "@/components/ui/textarea";
 
-<Textarea placeholder="Enter your message" rows={4} />
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+
+<Textarea placeholder="Enter your message" rows={4} />;
 ```
 
 ### Select
@@ -83,16 +90,18 @@ import { Textarea } from "@/components/ui/textarea";
 A styled select dropdown component.
 
 **Props:**
+
 - All standard select HTML attributes
 
 **Usage:**
+
 ```tsx
-import { Select } from "@/components/ui/select";
+import { Select } from '@/components/ui/select';
 
 <Select>
   <option value="option1">Option 1</option>
   <option value="option2">Option 2</option>
-</Select>
+</Select>;
 ```
 
 ### Badge
@@ -100,14 +109,16 @@ import { Select } from "@/components/ui/select";
 A small badge component for displaying status or labels.
 
 **Props:**
+
 - `variant`: "default" | "secondary" | "destructive" | "outline" | "success" | "warning"
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { Badge } from "@/components/ui/badge";
 
-<Badge variant="success">Active</Badge>
+```tsx
+import { Badge } from '@/components/ui/badge';
+
+<Badge variant="success">Active</Badge>;
 ```
 
 ### Alert
@@ -115,21 +126,24 @@ import { Badge } from "@/components/ui/badge";
 A component for displaying important messages or notifications.
 
 **Props:**
+
 - `variant`: "default" | "destructive" | "success" | "warning"
 - All standard div HTML attributes
 
 **Subcomponents:**
+
 - `AlertTitle` - Title of the alert
 - `AlertDescription` - Detailed description
 
 **Usage:**
+
 ```tsx
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 <Alert variant="success">
   <AlertTitle>Success!</AlertTitle>
   <AlertDescription>Your action was completed successfully.</AlertDescription>
-</Alert>
+</Alert>;
 ```
 
 ## Layout Components
@@ -139,17 +153,19 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 A consistent header component for application layouts.
 
 **Props:**
+
 - `variant`: "default" | "primary" | "secondary"
 - `size`: "default" | "sm" | "lg"
 - All standard header HTML attributes
 
 **Usage:**
+
 ```tsx
-import { Header } from "@/components/ui/header";
+import { Header } from '@/components/ui/header';
 
 <Header variant="primary" size="lg">
   Application Header
-</Header>
+</Header>;
 ```
 
 ### Footer
@@ -157,15 +173,15 @@ import { Header } from "@/components/ui/header";
 A footer component for application layouts.
 
 **Props:**
+
 - All standard footer HTML attributes
 
 **Usage:**
-```tsx
-import { Footer } from "@/components/ui/footer";
 
-<Footer>
-  Application Footer Content
-</Footer>
+```tsx
+import { Footer } from '@/components/ui/footer';
+
+<Footer>Application Footer Content</Footer>;
 ```
 
 ### Modal
@@ -173,17 +189,19 @@ import { Footer } from "@/components/ui/footer";
 A modal dialog component for displaying overlays.
 
 **Props:**
+
 - `isOpen`: boolean - Controls visibility
 - `onClose`: () => void - Callback when modal is closed
 - All standard div HTML attributes
 
 **Usage:**
+
 ```tsx
-import { Modal } from "@/components/ui/modal";
+import { Modal } from '@/components/ui/modal';
 
 <Modal isOpen={isOpen} onClose={handleClose}>
   <div>Modal Content</div>
-</Modal>
+</Modal>;
 ```
 
 ## Form Components
@@ -193,15 +211,15 @@ import { Modal } from "@/components/ui/modal";
 A form container with consistent spacing.
 
 **Props:**
+
 - All standard form HTML attributes
 
 **Usage:**
-```tsx
-import { Form } from "@/components/ui/form";
 
-<Form onSubmit={handleSubmit}>
-  {/* Form fields */}
-</Form>
+```tsx
+import { Form } from '@/components/ui/form';
+
+<Form onSubmit={handleSubmit}>{/* Form fields */}</Form>;
 ```
 
 ### FormField
@@ -209,16 +227,18 @@ import { Form } from "@/components/ui/form";
 A container for form fields with consistent spacing.
 
 **Props:**
+
 - All standard div HTML attributes
 
 **Usage:**
+
 ```tsx
-import { FormField } from "@/components/ui/form";
+import { FormField } from '@/components/ui/form';
 
 <FormField>
   <label htmlFor="fieldName">Field Label</label>
   <input id="fieldName" type="text" />
-</FormField>
+</FormField>;
 ```
 
 ## Custom Components
@@ -228,18 +248,20 @@ import { FormField } from "@/components/ui/form";
 A card component for displaying property listings.
 
 **Props:**
+
 - `property`: Property object with all property details
 - `onFavoriteToggle`: (id: number) => void - Callback for favorite toggle
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { PropertyCard } from "@/components/tenant/PropertyCard";
 
-<PropertyCard 
-  property={propertyData} 
+```tsx
+import { PropertyCard } from '@/components/tenant/PropertyCard';
+
+<PropertyCard
+  property={propertyData}
   onFavoriteToggle={handleFavoriteToggle}
-/>
+/>;
 ```
 
 ### LandlordPropertyCard
@@ -247,20 +269,22 @@ import { PropertyCard } from "@/components/tenant/PropertyCard";
 A card component for landlords to manage their properties.
 
 **Props:**
+
 - `property`: Property object with management details
 - `onEdit`: (id: number) => void - Callback for edit action
 - `onDelete`: (id: number) => void - Callback for delete action
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { LandlordPropertyCard } from "@/components/landlord/PropertyCard";
 
-<LandlordPropertyCard 
-  property={propertyData} 
+```tsx
+import { LandlordPropertyCard } from '@/components/landlord/PropertyCard';
+
+<LandlordPropertyCard
+  property={propertyData}
   onEdit={handleEdit}
   onDelete={handleDelete}
-/>
+/>;
 ```
 
 ### UserCard
@@ -268,6 +292,7 @@ import { LandlordPropertyCard } from "@/components/landlord/PropertyCard";
 A card component for displaying user information in admin panel.
 
 **Props:**
+
 - `user`: User object with all user details
 - `onApprove`: (id: number) => void - Callback for approval
 - `onSuspend`: (id: number) => void - Callback for suspension
@@ -275,15 +300,16 @@ A card component for displaying user information in admin panel.
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { UserCard } from "@/components/admin/UserCard";
 
-<UserCard 
-  user={userData} 
+```tsx
+import { UserCard } from '@/components/admin/UserCard';
+
+<UserCard
+  user={userData}
   onApprove={handleApprove}
   onSuspend={handleSuspend}
   onViewDetails={handleViewDetails}
-/>
+/>;
 ```
 
 ### StatsCard
@@ -291,6 +317,7 @@ import { UserCard } from "@/components/admin/UserCard";
 A card component for displaying statistics.
 
 **Props:**
+
 - `title`: string - Card title
 - `value`: string | number - Statistical value
 - `description`: string - Description of the statistic
@@ -300,17 +327,18 @@ A card component for displaying statistics.
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { StatsCard } from "@/components/landlord/StatsCard";
 
-<StatsCard 
+```tsx
+import { StatsCard } from '@/components/landlord/StatsCard';
+
+<StatsCard
   title="Total Properties"
   value={12}
   description="All properties you've listed"
   icon={<HomeIcon />}
   trend="up"
   trendValue="+2"
-/>
+/>;
 ```
 
 ## Hook Components
@@ -320,19 +348,17 @@ import { StatsCard } from "@/components/landlord/StatsCard";
 A form component for authentication flows.
 
 **Props:**
+
 - `type`: "login" | "register" - Form type
 - `onSubmit`: (data: any) => void - Submit callback
 - `isLoading`: boolean - Loading state
 
 **Usage:**
-```tsx
-import { AuthForm } from "@/components/auth/AuthForm";
 
-<AuthForm 
-  type="login" 
-  onSubmit={handleLogin} 
-  isLoading={isLoading}
-/>
+```tsx
+import { AuthForm } from '@/components/auth/AuthForm';
+
+<AuthForm type="login" onSubmit={handleLogin} isLoading={isLoading} />;
 ```
 
 ### RoleSelector
@@ -340,20 +366,22 @@ import { AuthForm } from "@/components/auth/AuthForm";
 A component for selecting user roles.
 
 **Props:**
+
 - `value`: string - Selected role
 - `onValueChange`: (value: string) => void - Change callback
 - `roles`: Array of role objects
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { RoleSelector } from "@/components/auth/RoleSelector";
 
-<RoleSelector 
-  value={selectedRole} 
+```tsx
+import { RoleSelector } from '@/components/auth/RoleSelector';
+
+<RoleSelector
+  value={selectedRole}
   onValueChange={setSelectedRole}
   roles={roleOptions}
-/>
+/>;
 ```
 
 ## Dashboard Components
@@ -363,14 +391,16 @@ import { RoleSelector } from "@/components/auth/RoleSelector";
 A component for displaying dashboard statistics.
 
 **Props:**
+
 - `stats`: Array of stat objects
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { DashboardOverview } from "@/components/dashboard/DashboardOverview";
 
-<DashboardOverview stats={statsData} />
+```tsx
+import { DashboardOverview } from '@/components/dashboard/DashboardOverview';
+
+<DashboardOverview stats={statsData} />;
 ```
 
 ### RecentActivity
@@ -378,18 +408,17 @@ import { DashboardOverview } from "@/components/dashboard/DashboardOverview";
 A component for displaying recent activity.
 
 **Props:**
+
 - `activities`: Array of activity objects
 - `onViewAll`: () => void - Callback for view all action
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { RecentActivity } from "@/components/dashboard/RecentActivity";
 
-<RecentActivity 
-  activities={activityData} 
-  onViewAll={handleViewAll}
-/>
+```tsx
+import { RecentActivity } from '@/components/dashboard/RecentActivity';
+
+<RecentActivity activities={activityData} onViewAll={handleViewAll} />;
 ```
 
 ## Utility Components
@@ -399,14 +428,16 @@ import { RecentActivity } from "@/components/dashboard/RecentActivity";
 A loading spinner component.
 
 **Props:**
+
 - `size`: "sm" | "md" | "lg" - Spinner size
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-<LoadingSpinner size="lg" />
+```tsx
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
+
+<LoadingSpinner size="lg" />;
 ```
 
 ### PropertyStatusBadge
@@ -414,14 +445,16 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 A badge component for property status.
 
 **Props:**
+
 - `status`: "available" | "rented" | "pending" | "draft" - Property status
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { PropertyStatusBadge } from "@/components/property/PropertyStatusBadge";
 
-<PropertyStatusBadge status="available" />
+```tsx
+import { PropertyStatusBadge } from '@/components/property/PropertyStatusBadge';
+
+<PropertyStatusBadge status="available" />;
 ```
 
 ### UserStatusBadge
@@ -429,14 +462,16 @@ import { PropertyStatusBadge } from "@/components/property/PropertyStatusBadge";
 A badge component for user status.
 
 **Props:**
+
 - `status`: "active" | "pending" | "suspended" - User status
 - All standard div HTML attributes
 
 **Usage:**
-```tsx
-import { UserStatusBadge } from "@/components/admin/UserStatusBadge";
 
-<UserStatusBadge status="active" />
+```tsx
+import { UserStatusBadge } from '@/components/admin/UserStatusBadge';
+
+<UserStatusBadge status="active" />;
 ```
 
 ## Best Practices
@@ -451,6 +486,7 @@ import { UserStatusBadge } from "@/components/admin/UserStatusBadge";
 ## Customization
 
 To customize the appearance of components:
+
 1. Modify the Tailwind CSS configuration in `tailwind.config.ts`
 2. Update CSS variables in `src/app/globals.css`
 3. Extend component variants in the component files
@@ -459,6 +495,7 @@ To customize the appearance of components:
 ## Testing
 
 Components should be tested with:
+
 1. Unit tests for isolated functionality
 2. Integration tests for component interactions
 3. Visual regression tests for UI consistency
@@ -467,6 +504,7 @@ Components should be tested with:
 ## Contributing
 
 When adding new components:
+
 1. Follow the existing component structure and patterns
 2. Ensure proper TypeScript typing
 3. Add comprehensive documentation

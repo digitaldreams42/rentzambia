@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
-import { AMENITIES, PROPERTY_TYPES } from "@/data/constants";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { AMENITIES, PROPERTY_TYPES } from '@/data/constants';
+import { cn } from '@/lib/utils';
 
 export interface PropertyFilters {
   searchQuery: string;
@@ -35,31 +35,34 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
       const newAmenities = filters.amenities.includes(amenity)
         ? filters.amenities.filter(a => a !== amenity)
         : [...filters.amenities, amenity];
-      
+
       onFiltersChange({
         ...filters,
-        amenities: newAmenities
+        amenities: newAmenities,
       });
     };
 
     const resetFilters = () => {
       onFiltersChange({
-        searchQuery: "",
+        searchQuery: '',
         minPrice: null,
         maxPrice: null,
         bedrooms: null,
         propertyType: null,
         furnished: null,
-        amenities: []
+        amenities: [],
       });
     };
 
     return (
-      <div ref={ref} className={cn("bg-card rounded-lg shadow-md p-6", className)}>
+      <div
+        ref={ref}
+        className={cn('bg-card rounded-lg shadow-md p-6', className)}
+      >
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg font-semibold text-foreground">Filters</h3>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             onClick={resetFilters}
             className="text-primary hover:text-primary/80"
           >
@@ -77,7 +80,9 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
               type="text"
               placeholder="Search by location, title..."
               value={filters.searchQuery}
-              onChange={(e) => onFiltersChange({ ...filters, searchQuery: e.target.value })}
+              onChange={e =>
+                onFiltersChange({ ...filters, searchQuery: e.target.value })
+              }
             />
           </div>
 
@@ -90,14 +95,24 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
               <Input
                 type="number"
                 placeholder="Min"
-                value={filters.minPrice || ""}
-                onChange={(e) => onFiltersChange({ ...filters, minPrice: e.target.value ? Number(e.target.value) : null })}
+                value={filters.minPrice || ''}
+                onChange={e =>
+                  onFiltersChange({
+                    ...filters,
+                    minPrice: e.target.value ? Number(e.target.value) : null,
+                  })
+                }
               />
               <Input
                 type="number"
                 placeholder="Max"
-                value={filters.maxPrice || ""}
-                onChange={(e) => onFiltersChange({ ...filters, maxPrice: e.target.value ? Number(e.target.value) : null })}
+                value={filters.maxPrice || ''}
+                onChange={e =>
+                  onFiltersChange({
+                    ...filters,
+                    maxPrice: e.target.value ? Number(e.target.value) : null,
+                  })
+                }
               />
             </div>
           </div>
@@ -107,12 +122,14 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
             <label className="block text-sm font-medium text-foreground mb-2">
               Bedrooms
             </label>
-            <Select 
-              value={filters.bedrooms?.toString() || ""} 
-              onValueChange={(value) => onFiltersChange({ 
-                ...filters, 
-                bedrooms: value ? Number(value) : null 
-              })}
+            <Select
+              value={filters.bedrooms?.toString() || ''}
+              onValueChange={value =>
+                onFiltersChange({
+                  ...filters,
+                  bedrooms: value ? Number(value) : null,
+                })
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Any" />
@@ -132,9 +149,11 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
             <label className="block text-sm font-medium text-foreground mb-2">
               Property Type
             </label>
-            <Select 
-              value={filters.propertyType || ""} 
-              onValueChange={(value) => onFiltersChange({ ...filters, propertyType: value })}
+            <Select
+              value={filters.propertyType || ''}
+              onValueChange={value =>
+                onFiltersChange({ ...filters, propertyType: value })
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Any" />
@@ -161,7 +180,9 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
                   type="radio"
                   name="furnished"
                   checked={filters.furnished === true}
-                  onChange={() => onFiltersChange({ ...filters, furnished: true })}
+                  onChange={() =>
+                    onFiltersChange({ ...filters, furnished: true })
+                  }
                   className="mr-2"
                 />
                 <span className="text-foreground">Yes</span>
@@ -171,7 +192,9 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
                   type="radio"
                   name="furnished"
                   checked={filters.furnished === false}
-                  onChange={() => onFiltersChange({ ...filters, furnished: false })}
+                  onChange={() =>
+                    onFiltersChange({ ...filters, furnished: false })
+                  }
                   className="mr-2"
                 />
                 <span className="text-foreground">No</span>
@@ -181,7 +204,9 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
                   type="radio"
                   name="furnished"
                   checked={filters.furnished === null}
-                  onChange={() => onFiltersChange({ ...filters, furnished: null })}
+                  onChange={() =>
+                    onFiltersChange({ ...filters, furnished: null })
+                  }
                   className="mr-2"
                 />
                 <span className="text-foreground">Any</span>
@@ -210,13 +235,11 @@ const PropertyFilter = React.forwardRef<HTMLDivElement, PropertyFilterProps>(
           </div>
         </div>
 
-        <Button className="w-full mt-6">
-          Apply Filters
-        </Button>
+        <Button className="w-full mt-6">Apply Filters</Button>
       </div>
     );
   }
 );
-PropertyFilter.displayName = "PropertyFilter";
+PropertyFilter.displayName = 'PropertyFilter';
 
 export { PropertyFilter };

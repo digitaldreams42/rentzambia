@@ -21,6 +21,7 @@ POST /api/v1/auth/login
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -30,6 +31,7 @@ POST /api/v1/auth/login
 ```
 
 **Response:**
+
 ```json
 {
   "token": "jwt_token_here",
@@ -49,6 +51,7 @@ POST /api/v1/auth/register
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "John Doe",
@@ -60,6 +63,7 @@ POST /api/v1/auth/register
 ```
 
 **Response:**
+
 ```json
 {
   "token": "jwt_token_here",
@@ -81,6 +85,7 @@ GET /api/v1/properties
 ```
 
 **Query Parameters:**
+
 - `search` (string): Search term
 - `minPrice` (number): Minimum price filter
 - `maxPrice` (number): Maximum price filter
@@ -91,6 +96,7 @@ GET /api/v1/properties
 - `limit` (number): Number of items per page
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -128,6 +134,7 @@ GET /api/v1/properties/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -165,6 +172,7 @@ POST /api/v1/properties
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "Modern 2-Bedroom Apartment",
@@ -187,6 +195,7 @@ POST /api/v1/properties
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -218,6 +227,7 @@ PUT /api/v1/properties/{id}
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "Updated Property Title",
@@ -229,6 +239,7 @@ PUT /api/v1/properties/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -260,6 +271,7 @@ DELETE /api/v1/properties/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "message": "Property deleted successfully"
@@ -275,6 +287,7 @@ GET /api/v1/users/profile
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -300,6 +313,7 @@ PUT /api/v1/users/profile
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "John Smith",
@@ -312,6 +326,7 @@ PUT /api/v1/users/profile
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -339,6 +354,7 @@ POST /api/v1/inquiries
 ```
 
 **Request Body:**
+
 ```json
 {
   "propertyId": 1,
@@ -347,6 +363,7 @@ POST /api/v1/inquiries
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -365,10 +382,12 @@ GET /api/v1/inquiries
 ```
 
 **Query Parameters:**
+
 - `propertyId` (number): Filter by property
 - `status` (string): Filter by status
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -395,6 +414,7 @@ PUT /api/v1/inquiries/{id}
 ```
 
 **Request Body:**
+
 ```json
 {
   "status": "responded"
@@ -402,6 +422,7 @@ PUT /api/v1/inquiries/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -422,6 +443,7 @@ POST /api/v1/bookings
 ```
 
 **Request Body:**
+
 ```json
 {
   "propertyId": 1,
@@ -431,6 +453,7 @@ POST /api/v1/bookings
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -450,11 +473,13 @@ GET /api/v1/bookings
 ```
 
 **Query Parameters:**
+
 - `userId` (number): Filter by user (for tenants)
 - `landlordId` (number): Filter by landlord
 - `status` (string): Filter by status
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -486,6 +511,7 @@ PUT /api/v1/bookings/{id}
 ```
 
 **Request Body:**
+
 ```json
 {
   "status": "confirmed"
@@ -493,6 +519,7 @@ PUT /api/v1/bookings/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -514,11 +541,13 @@ GET /api/v1/admin/users
 ```
 
 **Query Parameters:**
+
 - `role` (string): Filter by role
 - `status` (string): Filter by status
 - `search` (string): Search term
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -542,6 +571,7 @@ PUT /api/v1/admin/users/{id}
 ```
 
 **Request Body:**
+
 ```json
 {
   "status": "suspended"
@@ -549,6 +579,7 @@ PUT /api/v1/admin/users/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -568,11 +599,13 @@ GET /api/v1/admin/properties
 ```
 
 **Query Parameters:**
+
 - `status` (string): Filter by status
 - `landlordId` (number): Filter by landlord
 - `search` (string): Search term
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -599,6 +632,7 @@ PUT /api/v1/admin/properties/{id}
 ```
 
 **Request Body:**
+
 ```json
 {
   "status": "published"
@@ -606,6 +640,7 @@ PUT /api/v1/admin/properties/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -640,6 +675,7 @@ All API responses follow a consistent error format:
 ## Rate Limiting
 
 API endpoints are rate-limited to prevent abuse:
+
 - 100 requests per hour for unauthenticated endpoints
 - 1000 requests per hour for authenticated endpoints
 - 10 requests per minute for sensitive endpoints (login, register)
@@ -661,13 +697,17 @@ API endpoints are rate-limited to prevent abuse:
 The API supports webhooks for real-time notifications:
 
 ### Property Published
+
 Triggered when a property is published:
+
 ```
 POST /webhooks/property-published
 ```
 
 ### Booking Confirmed
+
 Triggered when a booking is confirmed:
+
 ```
 POST /webhooks/booking-confirmed
 ```
@@ -675,6 +715,7 @@ POST /webhooks/booking-confirmed
 ## Data Models
 
 ### User
+
 ```json
 {
   "id": 1,
@@ -695,6 +736,7 @@ POST /webhooks/booking-confirmed
 ```
 
 ### Property
+
 ```json
 {
   "id": 1,
@@ -723,6 +765,7 @@ POST /webhooks/booking-confirmed
 ```
 
 ### Inquiry
+
 ```json
 {
   "id": 1,
@@ -735,6 +778,7 @@ POST /webhooks/booking-confirmed
 ```
 
 ### Booking
+
 ```json
 {
   "id": 1,

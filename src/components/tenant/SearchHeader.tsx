@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export interface SearchHeaderProps {
   searchQuery: string;
@@ -22,23 +22,33 @@ export interface SearchHeaderProps {
 }
 
 const SearchHeader = React.forwardRef<HTMLDivElement, SearchHeaderProps>(
-  ({ searchQuery, onSearchChange, sortBy, onSortChange, onFilterClick, className }, ref) => {
+  (
+    {
+      searchQuery,
+      onSearchChange,
+      sortBy,
+      onSortChange,
+      onFilterClick,
+      className,
+    },
+    ref
+  ) => {
     return (
-      <div ref={ref} className={cn("flex flex-col md:flex-row gap-4", className)}>
+      <div
+        ref={ref}
+        className={cn('flex flex-col md:flex-row gap-4', className)}
+      >
         <div className="flex-1">
           <Input
             type="text"
             placeholder="Search properties..."
             className="w-full"
             value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
+            onChange={e => onSearchChange(e.target.value)}
           />
         </div>
         <div className="flex gap-2">
-          <Select 
-            value={sortBy} 
-            onValueChange={onSortChange}
-          >
+          <Select value={sortBy} onValueChange={onSortChange}>
             <SelectTrigger className="px-4 py-2">
               <SelectValue />
             </SelectTrigger>
@@ -49,10 +59,7 @@ const SearchHeader = React.forwardRef<HTMLDivElement, SearchHeaderProps>(
               <SelectItem value="newest">Newest First</SelectItem>
             </SelectContent>
           </Select>
-          <Button 
-            className="px-4 py-2"
-            onClick={onFilterClick}
-          >
+          <Button className="px-4 py-2" onClick={onFilterClick}>
             Filters
           </Button>
         </div>
@@ -60,6 +67,6 @@ const SearchHeader = React.forwardRef<HTMLDivElement, SearchHeaderProps>(
     );
   }
 );
-SearchHeader.displayName = "SearchHeader";
+SearchHeader.displayName = 'SearchHeader';
 
 export { SearchHeader };

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 export interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
   min?: number;
@@ -13,7 +13,18 @@ export interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
-  ({ min = 0, max = 100, step = 1, value = [0], onValueChange, className, ...props }, ref) => {
+  (
+    {
+      min = 0,
+      max = 100,
+      step = 1,
+      value = [0],
+      onValueChange,
+      className,
+      ...props
+    },
+    ref
+  ) => {
     const [values, setValues] = React.useState(value);
     const sliderRef = React.useRef<HTMLDivElement>(null);
 
@@ -28,7 +39,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       e.preventDefault();
       const handleMouseMove = (moveEvent: MouseEvent) => {
         if (!sliderRef.current) return;
-        
+
         const rect = sliderRef.current.getBoundingClientRect();
         const percentage = (moveEvent.clientX - rect.left) / rect.width;
         const newValue = min + percentage * (max - min);
@@ -47,17 +58,21 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     return (
       <div
         ref={sliderRef}
-        className={cn("relative flex w-full touch-none select-none items-center", className)}
+        className={cn(
+          'relative flex w-full touch-none select-none items-center',
+          className
+        )}
         {...props}
       >
         <div className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-          <div 
-            className="absolute h-full bg-primary" 
-            style={{ 
+          <div
+            className="absolute h-full bg-primary"
+            style={{
               left: `${((values[0] - min) / (max - min)) * 100}%`,
-              width: values.length > 1 
-                ? `${((values[1] - values[0]) / (max - min)) * 100}%` 
-                : '0%'
+              width:
+                values.length > 1
+                  ? `${((values[1] - values[0]) / (max - min)) * 100}%`
+                  : '0%',
             }}
           />
         </div>
@@ -65,9 +80,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           <button
             key={index}
             className="absolute top-1/2 h-5 w-5 rounded-full border-2 border-primary bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            style={{ 
+            style={{
               left: `${((value - min) / (max - min)) * 100}%`,
-              transform: 'translateX(-50%) translateY(-50%)'
+              transform: 'translateX(-50%) translateY(-50%)',
             }}
             onMouseDown={handleMouseDown(index)}
           />
@@ -76,6 +91,6 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     );
   }
 );
-Slider.displayName = "Slider";
+Slider.displayName = 'Slider';
 
 export { Slider };

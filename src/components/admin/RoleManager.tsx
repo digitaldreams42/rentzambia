@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   Table,
   TableBody,
@@ -16,33 +16,33 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
 interface User {
   id: number;
   name: string;
   email: string;
-  role: "tenant" | "landlord" | "agent" | "admin";
-  status: "active" | "pending" | "suspended";
+  role: 'tenant' | 'landlord' | 'agent' | 'admin';
+  status: 'active' | 'pending' | 'suspended';
 }
 
 interface RoleManagerProps {
   users: User[];
-  onRoleChange: (userId: number, newRole: User["role"]) => void;
+  onRoleChange: (userId: number, newRole: User['role']) => void;
 }
 
 export function RoleManager({ users, onRoleChange }: RoleManagerProps) {
   const [editingUserId, setEditingUserId] = useState<number | null>(null);
-  const [newRole, setNewRole] = useState<User["role"]>("tenant");
+  const [newRole, setNewRole] = useState<User['role']>('tenant');
 
-  const handleRoleChange = (userId: number, role: User["role"]) => {
+  const handleRoleChange = (userId: number, role: User['role']) => {
     setEditingUserId(userId);
     setNewRole(role);
   };
 
   const handleRoleSelectChange = (value: string) => {
     // Type assertion since we know the value will be a valid role
-    setNewRole(value as User["role"]);
+    setNewRole(value as User['role']);
   };
 
   const saveRoleChange = (userId: number) => {
@@ -56,8 +56,10 @@ export function RoleManager({ users, onRoleChange }: RoleManagerProps) {
 
   return (
     <div className="bg-card rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold text-foreground mb-6">User Role Management</h2>
-      
+      <h2 className="text-xl font-semibold text-foreground mb-6">
+        User Role Management
+      </h2>
+
       <Table>
         <TableHeader>
           <TableRow>
@@ -68,7 +70,7 @@ export function RoleManager({ users, onRoleChange }: RoleManagerProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user) => (
+          {users.map(user => (
             <TableRow key={user.id}>
               <TableCell>
                 <div>
@@ -78,7 +80,10 @@ export function RoleManager({ users, onRoleChange }: RoleManagerProps) {
               <TableCell>{user.email}</TableCell>
               <TableCell>
                 {editingUserId === user.id ? (
-                  <Select value={newRole} onValueChange={handleRoleSelectChange}>
+                  <Select
+                    value={newRole}
+                    onValueChange={handleRoleSelectChange}
+                  >
                     <SelectTrigger className="w-[180px]">
                       <SelectValue />
                     </SelectTrigger>
@@ -96,23 +101,20 @@ export function RoleManager({ users, onRoleChange }: RoleManagerProps) {
               <TableCell>
                 {editingUserId === user.id ? (
                   <div className="flex space-x-2">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
                       onClick={cancelRoleChange}
                     >
                       Cancel
                     </Button>
-                    <Button 
-                      size="sm"
-                      onClick={() => saveRoleChange(user.id)}
-                    >
+                    <Button size="sm" onClick={() => saveRoleChange(user.id)}>
                       Save
                     </Button>
                   </div>
                 ) : (
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={() => handleRoleChange(user.id, user.role)}
                   >

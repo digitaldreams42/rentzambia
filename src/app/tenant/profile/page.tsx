@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from 'react';
+import { Form, FormField, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 // Mock user data
 const mockUser = {
   id: 1,
-  name: "John Mwanza",
-  email: "john.mwanza@email.com",
-  phone: "+260 97 123 4567",
-  role: "tenant",
-  joinDate: "2025-01-15",
+  name: 'John Mwanza',
+  email: 'john.mwanza@email.com',
+  phone: '+260 97 123 4567',
+  role: 'tenant',
+  joinDate: '2025-01-15',
   bio: "I'm a professional looking for a comfortable place to live in Lusaka. I work in the city center and prefer properties that are well-connected to public transport.",
   preferences: {
-    propertyType: "apartment",
-    budget: "2000-4000",
-    location: "Kabulonga, Roma, City Center",
-    moveInDate: "2025-03-01"
-  }
+    propertyType: 'apartment',
+    budget: '2000-4000',
+    location: 'Kabulonga, Roma, City Center',
+    moveInDate: '2025-03-01',
+  },
 };
 
 export default function TenantProfilePage() {
@@ -43,8 +43,8 @@ export default function TenantProfilePage() {
       ...prev,
       preferences: {
         ...prev.preferences,
-        [field]: value
-      }
+        [field]: value,
+      },
     }));
   };
 
@@ -57,7 +57,7 @@ export default function TenantProfilePage() {
             <div className="flex items-center">
               <h1 className="text-xl font-bold text-foreground">My Profile</h1>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <button className="text-foreground hover:text-primary">
                 Notifications
@@ -80,11 +80,13 @@ export default function TenantProfilePage() {
               <h2 className="text-2xl font-bold text-foreground">
                 Profile Information
               </h2>
-              <Button 
-                variant={isEditing ? "outline" : "default"}
-                onClick={() => isEditing ? setIsEditing(false) : setIsEditing(true)}
+              <Button
+                variant={isEditing ? 'outline' : 'default'}
+                onClick={() =>
+                  isEditing ? setIsEditing(false) : setIsEditing(true)
+                }
               >
-                {isEditing ? "Cancel" : "Edit Profile"}
+                {isEditing ? 'Cancel' : 'Edit Profile'}
               </Button>
             </div>
 
@@ -97,7 +99,7 @@ export default function TenantProfilePage() {
                       id="name"
                       type="text"
                       value={formData.name}
-                      onChange={(e) => handleChange("name", e.target.value)}
+                      onChange={e => handleChange('name', e.target.value)}
                       required
                     />
                   </FormField>
@@ -108,7 +110,7 @@ export default function TenantProfilePage() {
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleChange("email", e.target.value)}
+                      onChange={e => handleChange('email', e.target.value)}
                       required
                     />
                   </FormField>
@@ -119,7 +121,7 @@ export default function TenantProfilePage() {
                       id="phone"
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => handleChange("phone", e.target.value)}
+                      onChange={e => handleChange('phone', e.target.value)}
                       required
                     />
                   </FormField>
@@ -140,7 +142,7 @@ export default function TenantProfilePage() {
                   <Textarea
                     id="bio"
                     value={formData.bio}
-                    onChange={(e) => handleChange("bio", e.target.value)}
+                    onChange={e => handleChange('bio', e.target.value)}
                     rows={4}
                   />
                 </FormField>
@@ -149,15 +151,22 @@ export default function TenantProfilePage() {
                   <h3 className="text-lg font-semibold text-foreground mb-4">
                     Rental Preferences
                   </h3>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField>
-                      <FormLabel htmlFor="propertyType">Preferred Property Type</FormLabel>
+                      <FormLabel htmlFor="propertyType">
+                        Preferred Property Type
+                      </FormLabel>
                       <Input
                         id="propertyType"
                         type="text"
                         value={formData.preferences.propertyType}
-                        onChange={(e) => handlePreferencesChange("propertyType", e.target.value)}
+                        onChange={e =>
+                          handlePreferencesChange(
+                            'propertyType',
+                            e.target.value
+                          )
+                        }
                       />
                     </FormField>
 
@@ -167,36 +176,44 @@ export default function TenantProfilePage() {
                         id="budget"
                         type="text"
                         value={formData.preferences.budget}
-                        onChange={(e) => handlePreferencesChange("budget", e.target.value)}
+                        onChange={e =>
+                          handlePreferencesChange('budget', e.target.value)
+                        }
                       />
                     </FormField>
 
                     <FormField>
-                      <FormLabel htmlFor="location">Preferred Locations</FormLabel>
+                      <FormLabel htmlFor="location">
+                        Preferred Locations
+                      </FormLabel>
                       <Input
                         id="location"
                         type="text"
                         value={formData.preferences.location}
-                        onChange={(e) => handlePreferencesChange("location", e.target.value)}
+                        onChange={e =>
+                          handlePreferencesChange('location', e.target.value)
+                        }
                       />
                     </FormField>
 
                     <FormField>
-                      <FormLabel htmlFor="moveInDate">Preferred Move-in Date</FormLabel>
+                      <FormLabel htmlFor="moveInDate">
+                        Preferred Move-in Date
+                      </FormLabel>
                       <Input
                         id="moveInDate"
                         type="date"
                         value={formData.preferences.moveInDate}
-                        onChange={(e) => handlePreferencesChange("moveInDate", e.target.value)}
+                        onChange={e =>
+                          handlePreferencesChange('moveInDate', e.target.value)
+                        }
                       />
                     </FormField>
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <Button type="submit">
-                    Save Changes
-                  </Button>
+                  <Button type="submit">Save Changes</Button>
                 </div>
               </Form>
             ) : (
@@ -213,12 +230,16 @@ export default function TenantProfilePage() {
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Phone Number</p>
+                    <p className="text-sm text-muted-foreground">
+                      Phone Number
+                    </p>
                     <p className="font-medium text-foreground">{user.phone}</p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Member Since</p>
+                    <p className="text-sm text-muted-foreground">
+                      Member Since
+                    </p>
                     <p className="font-medium text-foreground">
                       {new Date(user.joinDate).toLocaleDateString()}
                     </p>
@@ -234,33 +255,43 @@ export default function TenantProfilePage() {
                   <h3 className="text-lg font-semibold text-foreground mb-4">
                     Rental Preferences
                   </h3>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <p className="text-sm text-muted-foreground">Preferred Property Type</p>
+                      <p className="text-sm text-muted-foreground">
+                        Preferred Property Type
+                      </p>
                       <p className="font-medium text-foreground">
                         {user.preferences.propertyType}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-sm text-muted-foreground">Budget Range (K)</p>
+                      <p className="text-sm text-muted-foreground">
+                        Budget Range (K)
+                      </p>
                       <p className="font-medium text-foreground">
                         {user.preferences.budget}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-sm text-muted-foreground">Preferred Locations</p>
+                      <p className="text-sm text-muted-foreground">
+                        Preferred Locations
+                      </p>
                       <p className="font-medium text-foreground">
                         {user.preferences.location}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-sm text-muted-foreground">Preferred Move-in Date</p>
+                      <p className="text-sm text-muted-foreground">
+                        Preferred Move-in Date
+                      </p>
                       <p className="font-medium text-foreground">
-                        {new Date(user.preferences.moveInDate).toLocaleDateString()}
+                        {new Date(
+                          user.preferences.moveInDate
+                        ).toLocaleDateString()}
                       </p>
                     </div>
                   </div>

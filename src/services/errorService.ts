@@ -16,15 +16,15 @@ export class ErrorService {
     if (typeof error === 'string') {
       return error;
     }
-    
+
     if (error instanceof Error) {
       return error.message;
     }
-    
+
     if (error?.message) {
       return error.message;
     }
-    
+
     return 'An unexpected error occurred';
   }
 
@@ -33,18 +33,19 @@ export class ErrorService {
     if (error?.response?.data?.message) {
       return {
         message: error.response.data.message,
-        code: error.response.data.code
+        code: error.response.data.code,
       };
     }
-    
+
     if (error?.message) {
       return {
-        message: error.message
+        message: error.message,
       };
     }
-    
+
     return {
-      message: 'An unexpected error occurred while communicating with the server'
+      message:
+        'An unexpected error occurred while communicating with the server',
     };
   }
 
@@ -53,7 +54,7 @@ export class ErrorService {
     if (errors.length === 1) {
       return errors[0];
     }
-    
+
     return `Please fix the following issues:\n${errors.map((err, i) => `${i + 1}. ${err}`).join('\n')}`;
   }
 
@@ -67,15 +68,19 @@ export class ErrorService {
 
   // Check if error is network related
   static isNetworkError(error: any): boolean {
-    return error?.code === 'NETWORK_ERROR' || 
-           error?.message?.includes('Network Error') ||
-           error?.message?.includes('Failed to fetch');
+    return (
+      error?.code === 'NETWORK_ERROR' ||
+      error?.message?.includes('Network Error') ||
+      error?.message?.includes('Failed to fetch')
+    );
   }
 
   // Check if error is authentication related
   static isAuthError(error: any): boolean {
-    return error?.response?.status === 401 || 
-           error?.response?.status === 403 ||
-           error?.code === 'AUTH_ERROR';
+    return (
+      error?.response?.status === 401 ||
+      error?.response?.status === 403 ||
+      error?.code === 'AUTH_ERROR'
+    );
   }
 }

@@ -1,6 +1,12 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
@@ -12,7 +18,11 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  register: (email: string, password: string, fullName: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    fullName: string
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -34,7 +44,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // In a real implementation, you would use:
     // import { signInWithEmailAndPassword } from 'firebase/auth';
     // return signInWithEmailAndPassword(auth, email, password);
-    
+
     // For now, we'll simulate the login
     console.log('Login attempt with:', email);
     return Promise.resolve();
@@ -44,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // In a real implementation, you would use:
     // import { signOut } from 'firebase/auth';
     // return signOut(auth);
-    
+
     // For now, we'll simulate the logout
     setCurrentUser(null);
     setUserData(null);
@@ -55,16 +65,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // In a real implementation, you would use:
     // import { createUserWithEmailAndPassword } from 'firebase/auth';
     // return createUserWithEmailAndPassword(auth, email, password);
-    
+
     // For now, we'll simulate the registration
     console.log('Registration attempt with:', email, fullName);
     return Promise.resolve();
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
       setCurrentUser(user);
-      
+
       if (user) {
         // Fetch user data from Firestore
         try {
@@ -78,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setUserData(null);
       }
-      
+
       setLoading(false);
     });
 
@@ -91,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     login,
     logout,
-    register
+    register,
   };
 
   return (

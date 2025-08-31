@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
 
 interface SMSNotifierProps {
   recipient: string;
@@ -11,13 +11,18 @@ interface SMSNotifierProps {
   loading?: boolean;
 }
 
-export function SMSNotifier({ recipient, message, onSend, loading }: SMSNotifierProps) {
+export function SMSNotifier({
+  recipient,
+  message,
+  onSend,
+  loading,
+}: SMSNotifierProps) {
   const [isSent, setIsSent] = useState(false);
 
   const handleSend = () => {
     onSend({ recipient, message });
     setIsSent(true);
-    
+
     // Reset sent status after 3 seconds
     setTimeout(() => setIsSent(false), 3000);
   };
@@ -29,9 +34,9 @@ export function SMSNotifier({ recipient, message, onSend, loading }: SMSNotifier
           <Icons.messageSquare className="w-5 h-5 text-primary mr-2" />
           <span>SMS Notification</span>
         </div>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           size="sm"
           onClick={handleSend}
           disabled={loading || isSent}
@@ -47,11 +52,11 @@ export function SMSNotifier({ recipient, message, onSend, loading }: SMSNotifier
               Sending
             </span>
           ) : (
-            "Send SMS"
+            'Send SMS'
           )}
         </Button>
       </div>
-      
+
       <div className="mt-2 text-sm text-muted-foreground">
         <p>To: {recipient}</p>
         <p className="truncate">Message: {message}</p>

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 export interface SelectProps {
   children: React.ReactNode;
@@ -10,7 +10,8 @@ export interface SelectProps {
   className?: string;
 }
 
-export interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface SelectTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
 }
@@ -37,20 +38,30 @@ const SelectContext = React.createContext<{
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }>({
-  value: "",
+  value: '',
   onValueChange: () => {},
   open: false,
   onOpenChange: () => {},
 });
 
-const Select = ({ children, value = "", onValueChange, className }: SelectProps) => {
+const Select = ({
+  children,
+  value = '',
+  onValueChange,
+  className,
+}: SelectProps) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <SelectContext.Provider value={{ value, onValueChange: onValueChange || (() => {}), open, onOpenChange: setOpen }}>
-      <div className={cn("relative", className)}>
-        {children}
-      </div>
+    <SelectContext.Provider
+      value={{
+        value,
+        onValueChange: onValueChange || (() => {}),
+        open,
+        onOpenChange: setOpen,
+      }}
+    >
+      <div className={cn('relative', className)}>{children}</div>
     </SelectContext.Provider>
   );
 };
@@ -58,12 +69,12 @@ const Select = ({ children, value = "", onValueChange, className }: SelectProps)
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ className, children, ...props }, ref) => {
     const { open, onOpenChange } = React.useContext(SelectContext);
-    
+
     return (
       <button
         ref={ref}
         className={cn(
-          "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}
         onClick={() => onOpenChange(!open)}
@@ -86,27 +97,23 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
     );
   }
 );
-SelectTrigger.displayName = "SelectTrigger";
+SelectTrigger.displayName = 'SelectTrigger';
 
 const SelectValue = ({ placeholder, children }: SelectValueProps) => {
   const { value } = React.useContext(SelectContext);
-  
-  return (
-    <span>
-      {children || value || placeholder}
-    </span>
-  );
+
+  return <span>{children || value || placeholder}</span>;
 };
 
 const SelectContent = ({ children, className }: SelectContentProps) => {
   const { open } = React.useContext(SelectContext);
-  
+
   if (!open) return null;
-  
+
   return (
     <div
       className={cn(
-        "absolute z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95",
+        'absolute z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
         className
       )}
     >
@@ -116,20 +123,24 @@ const SelectContent = ({ children, className }: SelectContentProps) => {
 };
 
 const SelectItem = ({ value, children, className }: SelectItemProps) => {
-  const { value: selectedValue, onValueChange, onOpenChange } = React.useContext(SelectContext);
-  
+  const {
+    value: selectedValue,
+    onValueChange,
+    onOpenChange,
+  } = React.useContext(SelectContext);
+
   const isSelected = selectedValue === value;
-  
+
   const handleClick = () => {
     onValueChange(value);
     onOpenChange(false);
   };
-  
+
   return (
     <div
       className={cn(
-        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        isSelected && "bg-accent text-accent-foreground",
+        'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+        isSelected && 'bg-accent text-accent-foreground',
         className
       )}
       onClick={handleClick}

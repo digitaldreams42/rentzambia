@@ -27,7 +27,9 @@ describe('AuthService', () => {
   describe('login', () => {
     it('should call signInWithEmailAndPassword with correct parameters', async () => {
       const { signInWithEmailAndPassword } = require('firebase/auth');
-      signInWithEmailAndPassword.mockResolvedValue({ user: { uid: 'test-uid' } });
+      signInWithEmailAndPassword.mockResolvedValue({
+        user: { uid: 'test-uid' },
+      });
 
       const result = await AuthService.login('test@example.com', 'password123');
 
@@ -44,10 +46,17 @@ describe('AuthService', () => {
     it('should call createUserWithEmailAndPassword and setDoc', async () => {
       const { createUserWithEmailAndPassword } = require('firebase/auth');
       const { setDoc } = require('firebase/firestore');
-      
-      createUserWithEmailAndPassword.mockResolvedValue({ user: { uid: 'test-uid', email: 'test@example.com' } });
 
-      const result = await AuthService.register('test@example.com', 'password123', 'Test User', 'tenant');
+      createUserWithEmailAndPassword.mockResolvedValue({
+        user: { uid: 'test-uid', email: 'test@example.com' },
+      });
+
+      const result = await AuthService.register(
+        'test@example.com',
+        'password123',
+        'Test User',
+        'tenant'
+      );
 
       expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(
         expect.anything(),
@@ -62,7 +71,7 @@ describe('AuthService', () => {
   describe('logout', () => {
     it('should call signOut', async () => {
       const { signOut } = require('firebase/auth');
-      
+
       await AuthService.logout();
 
       expect(signOut).toHaveBeenCalledWith(expect.anything());

@@ -4,7 +4,9 @@ describe('ValidationService', () => {
   describe('isValidEmail', () => {
     it('should return true for valid emails', () => {
       expect(ValidationService.isValidEmail('test@example.com')).toBe(true);
-      expect(ValidationService.isValidEmail('user.name@domain.co.zm')).toBe(true);
+      expect(ValidationService.isValidEmail('user.name@domain.co.zm')).toBe(
+        true
+      );
     });
 
     it('should return false for invalid emails', () => {
@@ -21,7 +23,9 @@ describe('ValidationService', () => {
     });
 
     it('should return false for invalid Zambian phone numbers', () => {
-      expect(ValidationService.isValidZambianPhone('+260123456789')).toBe(false);
+      expect(ValidationService.isValidZambianPhone('+260123456789')).toBe(
+        false
+      );
       expect(ValidationService.isValidZambianPhone('097123456789')).toBe(false);
     });
   });

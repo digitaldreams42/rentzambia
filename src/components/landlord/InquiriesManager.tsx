@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
 interface Inquiry {
   id: number;
@@ -29,56 +29,78 @@ interface Inquiry {
   userPhone: string;
   message: string;
   date: string;
-  status: "pending" | "responded" | "closed";
+  status: 'pending' | 'responded' | 'closed';
 }
 
 interface InquiriesManagerProps {
   inquiries: Inquiry[];
   onRespond: (inquiryId: number, response: string) => void;
-  onStatusChange: (inquiryId: number, status: Inquiry["status"]) => void;
+  onStatusChange: (inquiryId: number, status: Inquiry['status']) => void;
 }
 
-export function InquiriesManager({ inquiries, onRespond, onStatusChange }: InquiriesManagerProps) {
+export function InquiriesManager({
+  inquiries,
+  onRespond,
+  onStatusChange,
+}: InquiriesManagerProps) {
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState('');
   const [isResponding, setIsResponding] = useState(false);
 
   const handleSendResponse = async () => {
     if (!selectedInquiry || !response.trim()) return;
-    
+
     setIsResponding(true);
     try {
       await onRespond(selectedInquiry.id, response);
-      setResponse("");
+      setResponse('');
       setSelectedInquiry(null);
     } catch (error) {
-      console.error("Failed to send response:", error);
-      alert("Failed to send response. Please try again.");
+      console.error('Failed to send response:', error);
+      alert('Failed to send response. Please try again.');
     } finally {
       setIsResponding(false);
     }
   };
 
-  const getStatusBadge = (status: Inquiry["status"]) => {
+  const getStatusBadge = (status: Inquiry['status']) => {
     switch (status) {
-      case "pending":
-        return <span className="bg-warning/10 text-warning px-2 py-1 rounded-full text-xs">Pending</span>;
-      case "responded":
-        return <span className="bg-success/10 text-success px-2 py-1 rounded-full text-xs">Responded</span>;
-      case "closed":
-        return <span className="bg-muted/10 text-muted-foreground px-2 py-1 rounded-full text-xs">Closed</span>;
+      case 'pending':
+        return (
+          <span className="bg-warning/10 text-warning px-2 py-1 rounded-full text-xs">
+            Pending
+          </span>
+        );
+      case 'responded':
+        return (
+          <span className="bg-success/10 text-success px-2 py-1 rounded-full text-xs">
+            Responded
+          </span>
+        );
+      case 'closed':
+        return (
+          <span className="bg-muted/10 text-muted-foreground px-2 py-1 rounded-full text-xs">
+            Closed
+          </span>
+        );
       default:
-        return <span className="bg-muted/10 text-muted-foreground px-2 py-1 rounded-full text-xs">Unknown</span>;
+        return (
+          <span className="bg-muted/10 text-muted-foreground px-2 py-1 rounded-full text-xs">
+            Unknown
+          </span>
+        );
     }
   };
 
   return (
     <div className="bg-card rounded-lg shadow-md p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-foreground">Property Inquiries</h2>
+        <h2 className="text-xl font-semibold text-foreground">
+          Property Inquiries
+        </h2>
         <p className="text-muted-foreground">{inquiries.length} inquiries</p>
       </div>
-      
+
       {inquiries.length > 0 ? (
         <Table>
           <TableHeader>
@@ -91,23 +113,27 @@ export function InquiriesManager({ inquiries, onRespond, onStatusChange }: Inqui
             </TableRow>
           </TableHeader>
           <TableBody>
-            {inquiries.map((inquiry) => (
+            {inquiries.map(inquiry => (
               <TableRow key={inquiry.id}>
                 <TableCell>
                   <div>
                     <p className="font-medium">{inquiry.userName}</p>
-                    <p className="text-sm text-muted-foreground">{inquiry.userEmail}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {inquiry.userEmail}
+                    </p>
                   </div>
                 </TableCell>
                 <TableCell>Property #{inquiry.propertyId}</TableCell>
-                <TableCell>{new Date(inquiry.date).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {new Date(inquiry.date).toLocaleDateString()}
+                </TableCell>
                 <TableCell>{getStatusBadge(inquiry.status)}</TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           size="sm"
                           onClick={() => setSelectedInquiry(inquiry)}
                         >
@@ -120,29 +146,44 @@ export function InquiriesManager({ inquiries, onRespond, onStatusChange }: Inqui
                         </DialogHeader>
                         <div className="space-y-4">
                           <div>
-                            <p className="text-sm text-muted-foreground">From</p>
+                            <p className="text-sm text-muted-foreground">
+                              From
+                            </p>
                             <p className="font-medium">{inquiry.userName}</p>
                             <p className="text-sm">{inquiry.userEmail}</p>
                             <p className="text-sm">{inquiry.userPhone}</p>
                           </div>
-                          
+
                           <div>
-                            <p className="text-sm text-muted-foreground">Date</p>
-                            <p className="font-medium">{new Date(inquiry.date).toLocaleString()}</p>
+                            <p className="text-sm text-muted-foreground">
+                              Date
+                            </p>
+                            <p className="font-medium">
+                              {new Date(inquiry.date).toLocaleString()}
+                            </p>
                           </div>
-                          
+
                           <div>
-                            <p className="text-sm text-muted-foreground">Message</p>
+                            <p className="text-sm text-muted-foreground">
+                              Message
+                            </p>
                             <p className="mt-1">{inquiry.message}</p>
                           </div>
-                          
+
                           <div>
-                            <p className="text-sm text-muted-foreground">Status</p>
+                            <p className="text-sm text-muted-foreground">
+                              Status
+                            </p>
                             <div className="flex items-center space-x-2 mt-1">
                               {getStatusBadge(inquiry.status)}
-                              <select 
+                              <select
                                 value={inquiry.status}
-                                onChange={(e) => onStatusChange(inquiry.id, e.target.value as Inquiry["status"])}
+                                onChange={e =>
+                                  onStatusChange(
+                                    inquiry.id,
+                                    e.target.value as Inquiry['status']
+                                  )
+                                }
                                 className="border rounded px-2 py-1 text-sm"
                               >
                                 <option value="pending">Pending</option>
@@ -151,22 +192,22 @@ export function InquiriesManager({ inquiries, onRespond, onStatusChange }: Inqui
                               </select>
                             </div>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <Label htmlFor="response">Your Response</Label>
                             <Textarea
                               id="response"
                               value={response}
-                              onChange={(e) => setResponse(e.target.value)}
+                              onChange={e => setResponse(e.target.value)}
                               placeholder="Type your response here..."
                               rows={4}
                             />
-                            <Button 
+                            <Button
                               onClick={handleSendResponse}
                               disabled={isResponding || !response.trim()}
                               className="w-full"
                             >
-                              {isResponding ? "Sending..." : "Send Response"}
+                              {isResponding ? 'Sending...' : 'Send Response'}
                             </Button>
                           </div>
                         </div>

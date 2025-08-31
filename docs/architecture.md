@@ -127,6 +127,7 @@ src/services/
 The application uses MongoDB with the following collections:
 
 #### Users Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -143,6 +144,7 @@ The application uses MongoDB with the following collections:
 ```
 
 #### Properties Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -171,6 +173,7 @@ The application uses MongoDB with the following collections:
 ```
 
 #### Bookings Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -186,6 +189,7 @@ The application uses MongoDB with the following collections:
 ```
 
 #### Inquiries Collection
+
 ```javascript
 {
   _id: ObjectId,

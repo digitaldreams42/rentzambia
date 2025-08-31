@@ -1,5 +1,5 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
@@ -10,17 +10,17 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   ({ className, isOpen, onClose, children, ...props }, ref) => {
     React.useEffect(() => {
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
+        if (e.key === 'Escape') onClose();
       };
 
       if (isOpen) {
-        document.addEventListener("keydown", handleEscape);
-        document.body.style.overflow = "hidden";
+        document.addEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'hidden';
       }
 
       return () => {
-        document.removeEventListener("keydown", handleEscape);
-        document.body.style.overflow = "unset";
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
       };
     }, [isOpen, onClose]);
 
@@ -33,11 +33,11 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       >
         <div
           className={cn(
-            "bg-background rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto",
+            'bg-background rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto',
             className
           )}
           ref={ref}
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
           {...props}
         >
           {children}
@@ -46,6 +46,6 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     );
   }
 );
-Modal.displayName = "Modal";
+Modal.displayName = 'Modal';
 
 export { Modal };

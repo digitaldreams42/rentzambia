@@ -1,24 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 
 interface FilterOverlayProps {
   onApplyFilters: (filters: any) => void;
   currentFilters: any;
 }
 
-export function FilterOverlay({ onApplyFilters, currentFilters }: FilterOverlayProps) {
+export function FilterOverlay({
+  onApplyFilters,
+  currentFilters,
+}: FilterOverlayProps) {
   const [filters, setFilters] = useState(currentFilters);
 
   const handleApply = () => {
@@ -53,7 +56,9 @@ export function FilterOverlay({ onApplyFilters, currentFilters }: FilterOverlayP
                 max={10000}
                 step={100}
                 value={filters.priceRange}
-                onValueChange={(value) => setFilters({...filters, priceRange: value})}
+                onValueChange={value =>
+                  setFilters({ ...filters, priceRange: value })
+                }
               />
               <div className="flex justify-between mt-2 text-sm text-muted-foreground">
                 <span>K{filters.priceRange[0]}</span>
@@ -66,21 +71,23 @@ export function FilterOverlay({ onApplyFilters, currentFilters }: FilterOverlayP
           <div>
             <Label>Property Type</Label>
             <div className="mt-2 space-y-2">
-              {['Apartment', 'House', 'Studio', 'Room'].map((type) => (
+              {['Apartment', 'House', 'Studio', 'Room'].map(type => (
                 <div key={type} className="flex items-center">
                   <Checkbox
                     id={`type-${type}`}
                     checked={filters.propertyTypes.includes(type)}
-                    onCheckedChange={(checked) => {
+                    onCheckedChange={checked => {
                       if (checked) {
                         setFilters({
                           ...filters,
-                          propertyTypes: [...filters.propertyTypes, type]
+                          propertyTypes: [...filters.propertyTypes, type],
                         });
                       } else {
                         setFilters({
                           ...filters,
-                          propertyTypes: filters.propertyTypes.filter((t: string) => t !== type)
+                          propertyTypes: filters.propertyTypes.filter(
+                            (t: string) => t !== type
+                          ),
                         });
                       }
                     }}
@@ -97,21 +104,23 @@ export function FilterOverlay({ onApplyFilters, currentFilters }: FilterOverlayP
           <div>
             <Label>Bedrooms</Label>
             <div className="mt-2 space-y-2">
-              {[1, 2, 3, 4, 5].map((beds) => (
+              {[1, 2, 3, 4, 5].map(beds => (
                 <div key={beds} className="flex items-center">
                   <Checkbox
                     id={`beds-${beds}`}
                     checked={filters.bedrooms.includes(beds)}
-                    onCheckedChange={(checked) => {
+                    onCheckedChange={checked => {
                       if (checked) {
                         setFilters({
                           ...filters,
-                          bedrooms: [...filters.bedrooms, beds]
+                          bedrooms: [...filters.bedrooms, beds],
                         });
                       } else {
                         setFilters({
                           ...filters,
-                          bedrooms: filters.bedrooms.filter((b: number) => b !== beds)
+                          bedrooms: filters.bedrooms.filter(
+                            (b: number) => b !== beds
+                          ),
                         });
                       }
                     }}
@@ -128,21 +137,30 @@ export function FilterOverlay({ onApplyFilters, currentFilters }: FilterOverlayP
           <div>
             <Label>Amenities</Label>
             <div className="mt-2 space-y-2">
-              {['WiFi', 'Parking', 'Security', 'Generator', 'Swimming Pool', 'Gym'].map((amenity) => (
+              {[
+                'WiFi',
+                'Parking',
+                'Security',
+                'Generator',
+                'Swimming Pool',
+                'Gym',
+              ].map(amenity => (
                 <div key={amenity} className="flex items-center">
                   <Checkbox
                     id={`amenity-${amenity}`}
                     checked={filters.amenities.includes(amenity)}
-                    onCheckedChange={(checked) => {
+                    onCheckedChange={checked => {
                       if (checked) {
                         setFilters({
                           ...filters,
-                          amenities: [...filters.amenities, amenity]
+                          amenities: [...filters.amenities, amenity],
                         });
                       } else {
                         setFilters({
                           ...filters,
-                          amenities: filters.amenities.filter((a: string) => a !== amenity)
+                          amenities: filters.amenities.filter(
+                            (a: string) => a !== amenity
+                          ),
                         });
                       }
                     }}

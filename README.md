@@ -15,6 +15,7 @@ RentZambia is a comprehensive property rental platform designed for the Zambian 
 ## ✨ Features
 
 ### For Tenants
+
 - 🏘️ Browse and search properties
 - ❤️ Save favorite properties
 - 📨 Send inquiries to landlords
@@ -23,6 +24,7 @@ RentZambia is a comprehensive property rental platform designed for the Zambian 
 - 📊 Manage rental history
 
 ### For Landlords & Agents
+
 - 📝 List properties for rent
 - 🛠️ Manage property listings
 - 📩 Handle tenant inquiries
@@ -30,6 +32,7 @@ RentZambia is a comprehensive property rental platform designed for the Zambian 
 - 📈 Track property performance
 
 ### For Admins
+
 - 👥 User management and verification
 - ✅ Property listing approval
 - 📊 Platform analytics and reporting
@@ -81,22 +84,26 @@ src/
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/rentzambia.git
    cd rentzambia
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Create a `.env.local` file:
+
    ```bash
    cp .env.example .env.local
    ```
 
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -123,16 +130,19 @@ src/
 RentZambia includes comprehensive testing:
 
 ### Unit Testing
+
 ```bash
 npm test
 ```
 
 ### End-to-End Testing
+
 ```bash
 npm run test:e2e
 ```
 
 ### Accessibility Testing
+
 ```bash
 npm run test:a11y
 ```

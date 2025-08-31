@@ -16,23 +16,28 @@ The RentZambia application follows a comprehensive testing approach that include
 ## Testing Tools
 
 ### Unit and Integration Testing
+
 - **Jest** - JavaScript testing framework
 - **React Testing Library** - For testing React components
 - **@testing-library/jest-dom** - Custom jest matchers for DOM assertions
 
 ### End-to-End Testing
+
 - **Cypress** - For end-to-end testing
 - **Playwright** - Alternative E2E testing framework
 
 ### Accessibility Testing
+
 - **axe-core** - Accessibility testing engine
 - **jest-axe** - Jest matcher for axe
 
 ### Performance Testing
+
 - **Lighthouse** - For performance and SEO auditing
 - **Web Vitals** - For measuring core web vitals
 
 ### Security Testing
+
 - **OWASP ZAP** - For security scanning
 - **Snyk** - For dependency vulnerability scanning
 
@@ -98,7 +103,7 @@ describe('useAuth', () => {
 
   it('logs in a user', async () => {
     const { result } = renderHook(() => useAuth());
-    
+
     await act(async () => {
       await result.current.login('user@example.com', 'password');
     });
@@ -183,7 +188,10 @@ describe('Tenant Property Search', () => {
   it('allows tenants to search for properties', () => {
     cy.get('[data-testid="search-input"]').type('Kabulonga');
     cy.get('[data-testid="search-button"]').click();
-    cy.get('[data-testid="property-card"]').should('have.length.greaterThan', 0);
+    cy.get('[data-testid="property-card"]').should(
+      'have.length.greaterThan',
+      0
+    );
   });
 
   it('allows tenants to view property details', () => {
@@ -223,8 +231,8 @@ describe('PropertyCard', () => {
       isFavorite: false,
       landlord: {
         name: 'Test Landlord',
-        rating: 4.5
-      }
+        rating: 4.5,
+      },
     };
 
     const { container } = render(<PropertyCard property={property} />);
@@ -259,26 +267,31 @@ describe('Web Vitals', () => {
 ### Running Tests
 
 1. **Run all tests:**
+
    ```bash
    npm test
    ```
 
 2. **Run tests in watch mode:**
+
    ```bash
    npm test -- --watch
    ```
 
 3. **Run tests with coverage:**
+
    ```bash
    npm test -- --coverage
    ```
 
 4. **Run specific test file:**
+
    ```bash
    npm test src/__tests__/components/ui/button.test.tsx
    ```
 
 5. **Run E2E tests:**
+
    ```bash
    npm run test:e2e
    ```
@@ -293,31 +306,27 @@ describe('Web Vitals', () => {
 ### Jest Configuration
 
 `jest.config.js`:
+
 ```javascript
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/.next/'
-  ],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts'
-  ]
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
 };
 ```
 
 ### Cypress Configuration
 
 `cypress.config.js`:
+
 ```javascript
 import { defineConfig } from 'cypress';
 
@@ -325,14 +334,15 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
     supportFile: 'cypress/support/e2e.ts',
-    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'
-  }
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+  },
 });
 ```
 
 ## Code Coverage
 
 The project aims for the following code coverage targets:
+
 - **Statements**: 80%
 - **Branches**: 75%
 - **Functions**: 85%
@@ -352,26 +362,26 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run unit tests
-      run: npm test -- --coverage
-      
-    - name: Run E2E tests
-      run: npm run test:e2e
-      
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --coverage
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
 ```
 
 ## Best Practices
@@ -404,6 +414,7 @@ jobs:
 ## Contributing to Tests
 
 When adding new tests:
+
 1. Follow existing test patterns and conventions
 2. Ensure tests are readable and maintainable
 3. Cover both happy paths and error cases
@@ -430,9 +441,9 @@ export const createProperty = (overrides = {}) => ({
   isFavorite: false,
   landlord: {
     name: 'Test Landlord',
-    rating: 4.5
+    rating: 4.5,
   },
-  ...overrides
+  ...overrides,
 });
 ```
 
@@ -446,6 +457,7 @@ export const createProperty = (overrides = {}) => ({
 ## Security Testing
 
 Regular security testing includes:
+
 1. **Dependency scanning** - Check for vulnerable packages
 2. **Input validation testing** - Test for injection attacks
 3. **Authentication testing** - Verify auth flows

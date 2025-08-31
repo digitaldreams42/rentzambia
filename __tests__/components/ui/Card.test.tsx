@@ -28,7 +28,7 @@ describe('Card', () => {
       </Card>
     );
 
-    const card = screen.getByRole('region');
+    const card = screen.getByText('Test Card').closest('.rounded-lg');
     expect(card).toHaveClass('rounded-lg', 'border');
   });
 });

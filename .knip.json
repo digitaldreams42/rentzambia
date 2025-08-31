@@ -8,9 +8,7 @@
     "src/types/**/*.{ts,tsx}",
     "src/data/**/*.{ts,tsx}"
   ],
-  "project": [
-    "src/**/*.{ts,tsx}"
-  ],
+  "project": ["src/**/*.{ts,tsx}"],
   "ignore": [
     "src/app/api/**",
     "src/__tests__/**",
