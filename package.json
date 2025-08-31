@@ -84,7 +84,7 @@
     "@typescript-eslint/parser": "^7.1.0",
     "autoprefixer": "^10.4.18",
     "commitizen": "^4.3.0",
-    "cypress": "^13.6.4",
+    "cypress": "^15.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8",
     "eslint-config-next": "^15.5.2",
