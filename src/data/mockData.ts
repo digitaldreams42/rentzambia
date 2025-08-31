@@ -134,6 +134,15 @@ export const mockUsers = [
     properties: 2,
     joinDate: '2024-09-05',
   },
+  {
+    id: 5,
+    name: 'Admin User',
+    email: 'admin@rentzambia.com',
+    role: 'admin' as const,
+    status: 'active' as const,
+    properties: 0,
+    joinDate: '2024-01-01',
+  },
 ];
 
 export const mockInquiries = [
